@@ -1,0 +1,63 @@
+%%%%%
+% Author:
+% Ismani Nieuweboer
+%   ismani.nieuweboer@student.uva.nl
+%   10502815
+%
+% Compile from this file to create the pdf.
+% Last checked working on overleaf.com
+%%%%%
+
+\documentclass{article}
+\usepackage{structure/mystyle}
+
+
+
+\title{Econophysics\\
+\normalsize{Summary}
+}
+\author{Ismani Nieuweboer}
+% \date{September 2018}
+
+\begin{document}
+
+\maketitle
+
+\url{https://arxiv.org/abs/0905.1518}
+\url{https://arxiv.org/abs/1309.3916}
+
+Colloquium article Victor Yakovenko: ``Colloquium: Statistical mechanics of money, wealth and income''.
+
+Money is conserved. Wealth is money + assets * asset prices. Income distribution follows.
+
+Money temperature
+
+In a system/model where the total amount of money is conserved and the individual amount is lower bounded per person, and constant random transfers happen, the Boltzmann-Gibbs distribution (or exponential distribution?) (of energy) appears. The money temperature rises (page 8).
+
+In a system/model where the total amount of money is conserved and the total amount of debt is bounded, two exponential distributions appear (page 8, fig 3).
+
+Proportional money transfer gives Gamma-like dist
+
+Page 10: Additive vs multiplicative model.
+
+Exp is additive (corresponds to lower class), power law is multiplicative (corresponds to upper class).
+
+Page 18: Silva, Yakovenko -- Fokker Planck equation
+\[
+\]
+gives ??
+\[
+\frac{\partial P}{\partial t}
+= \frac{\partial}{ \partial r} (AP + \frac{\partial (BP)}{ \partial r}
+\]
+with $A = - \frac{\xE{\Delta r}}{\Delta t}$, $B = \frac{\xE{(\Delta r)^2}}{2 \Delta t}$ % (remember from queueing theory
+first and second moment of income changes per unit time.
+
+Questions
+\begin{itemize}
+    \item Do we have cvg of Boltzmann-Gibbs to Exp in some sense of parameter choice?
+    \item Page 8 makes classical assumption about money multiplier, but Positive money e.a. show that this is not how financial system in UK and Europe work. What happens with model?
+\end{itemize}
+
+
+\end{document}

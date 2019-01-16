@@ -1,0 +1,129 @@
+%%%%%%%%%% Style declaration %%%%%%%%%%
+\ProvidesPackage{structure/mystyle}
+
+% Taal en tekenset
+% \usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+% Wiskunde
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{algpseudocode}
+\usepackage{interval}
+
+
+% Opmaak/indeling
+\usepackage{subfiles}
+\usepackage{afterpage}
+\newcommand*{\blankpagenumbered}{ % Skip de nummering op een pagina
+  \null\thispagestyle{empty}\newpage
+}
+% \usepackage{appendix}
+\usepackage{microtype} % margin kerning http://www.khirevich.com/latex/microtype/
+\usepackage{fullpage}
+%\usepackage{float}
+%\usepackage{caption}
+\usepackage{subcaption}
+% \usepackage{enumitem}
+
+% \usepackage{geometry}
+% \geometry{letterpaper}
+
+\usepackage{scrhack}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage[backgroundcolor=white, bordercolor=orange, linecolor=orange, textsize=small, disable]{todonotes} % requires ifthen, xkeyval, xcolor, tikz, calc, graphicx, conflicts with amsart
+%\allowdisplaybreaks   % Allow page breaks in align environment
+\usepackage[parfill]{parskip}
+%\usepackage{titlesec} % Start new page with each section
+%\newcommand{\sectionbreak}{\clearpage}
+
+% DRAFT WATERMARK
+%     \usepackage[firstpage]{draftwatermark} % adds draft watermark
+%     \SetWatermarkScale{5}
+%     \SetWatermarkLightness{0.85}
+
+
+
+
+% Andere packages
+\usepackage{etoolbox}
+
+
+%%%%% Aliases
+\input{structure/aliases}
+
+% \input{structure/xhat}
+% \input{structure/restr}
+% \input{structure/sqrt}
+\input{structure/custom}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% Hyperref als bijna laatste
+\usepackage{hyperref}
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor={red!50!black},
+%     citecolor={blue!50!black},
+%     urlcolor={blue!80!black},
+% }
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor={black},
+%     citecolor={black},
+%     urlcolor={blue!80!black},
+% }
+\hypersetup{
+    colorlinks=true,
+    linkcolor={black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black},
+}
+%\usepackage{fncylab}
+
+% \addto\extrasenglish{\def\chapterautorefname{chapter}}
+% \addto\extrasenglish{\def\sectionautorefname{section}}
+% \usepackage[nameinlink, noabbrev]{cleveref}  % lowercase
+
+
+
+
+
+%%% Nodig om een referentie te plaatsen in een align*
+\newcommand*{\numberthis}{
+  \addtocounter{equation}{1}\tag{\theequation}
+}
+
+% Introductie, conclusie, samenvatting
+\newcommand*{\chapteralt}[1]{
+  \chapter*{#1}
+  \addcontentsline{toc}{chapter}{#1}
+}
+
+
+
+
+
+
+
+
+
+

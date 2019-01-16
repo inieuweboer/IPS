@@ -1,0 +1,129 @@
+%%%%%
+% Author:
+% Ismani Nieuweboer
+%   ismani.nieuweboer@student.uva.nl
+%   10502815
+%
+% Compile from this file to create the pdf.
+% Last checked working on overleaf.com
+%%%%%
+
+\documentclass{article}
+\usepackage{structure/mystyle}
+
+% Bibliografie
+\usepackage{csquotes}
+\usepackage{ragged2e}
+\usepackage[
+    backend=bibtex,
+    % bibencoding=ascii,  % FOR SOME REASON THIS MUST BE DISABLE
+    % citestyle=authoryear 
+    citestyle=authoryear-icomp
+    % style=numeric,
+    style=alphabetic,
+    % sorting=none,
+]{biblatex}
+
+
+
+\title{Econophysics and wealth distribution models}
+\author{Ismani Nieuweboer}
+% \date{September 2018}
+
+\begin{document}
+
+\maketitle
+
+\url{https://arxiv.org/abs/0905.1518}
+\url{https://arxiv.org/abs/1309.3916}
+\url{https://arxiv.org/abs/1802.07068}
+\url{https://arxiv.org/abs/1811.05206}
+
+http://www.math.wisc.edu/~shottovy/NumPDEreport.pdf
+
+% https://en.yaronshemesh.com/inequality/
+% https://smus.com/simulating-wealth-inequality/
+% http://borismus.github.io/inequality-simulator/?model=1-world-income-ineq-doesnt-lead-to-wealth-ineq.js
+
+
+
+
+\section*{Introduction}
+Wealth distributions ...
+
+The topic arises in a context of interacting particle systems, described by T. Liggett \ref{liggett2012interacting}\ref{liggett2013stochastic}. For an overview of applications of interacting particle systems see also the list given in \ref{frankredig2014}.
+
+
+
+\section{Preliminaries}
+
+
+\section{Product measures}
+
+Under redistribution model with kernel $\mu$,
+\[
+\mu(x, y) \diff x \diff y  \text{ invariant iff }
+\nu(a, s) = \frac{ \mu(as, (1-a)s) }{\int_0^1 \mu(\alpha s, (1-\alpha)s) \diff \alpha}
+\]
+
+\section{Stationary for wealth dist}
+
+\[
+Lf(r) = \int \paren[\big]{f(\lambda r + (1 - \lambda)\epsilon) - f(r) } \diff \nu(\epsilon)
+\]
+must be stationary under iteration
+\[
+R_{n+1} = \lambda r_n + (1-\lambda)\epsilon_n
+\\= \lambda^{n+1} + (1-\lambda)\sum_{k=0}^n \lambda^{k} \epsilon_{n-k}
+\\\overset{\diff}{=} \lambda^{n+1} + (1-\lambda)\sum_{k=0}^n \lambda^{k} \epsilon_{k}
+\to 
+ (1-\lambda)\sum_{k=0}^{\infty} \lambda^{k} \epsilon_{k}
+\]
+which gives us the unique stationary distribution for $L$ $\nu_{\infty}$
+
+\hdots
+
+
+\section{Duality}
+% https://www.researchgate.net/profile/Anja_Voss-Boehme/publication/261811929_On_the_Equivalence_Between_Liggett_Duality_of_Markov_Processes_and_the_Duality_Relation_Between_Their_Generators/links/00b7d5358d931ad3c6000000/On-the-Equivalence-Between-Liggett-Duality-of-Markov-Processes-and-the-Duality-Relation-Between-Their-Generators.pdf
+
+
+
+\section{Diffusion}
+
+% https://www.math.nyu.edu/faculty/goodman/teaching/StochCalc2013/notes/Week9.pdf
+
+Let $\mu(r) = \frac{a(rs, (1-r)s)}{s}, h(r) = \frac{\sigma(r)^2}{2}=(1-r)r$
+
+Probability density should go to zero approaching the boundary points (in this case $0, 1$) 
+
+The density corresponding to the stationary distribution of a process with generator
+\[
+(L_s^r \cdot)(r)
+= \mu(r) \partial_r + \frac{\sigma(r)^2}{2} \partial_r^2
+= \mu(r) \partial_r + h(r) \partial_r^2
+\]
+of a diffusion process satisfies the Kolmogorov forward equation (also called the Fokker--Planck equation, see also the Feynman--Kac equation corresponding to the backward equation):
+\[
+0 = -\brackets{g(r) \psi(r)}' + \brackets{h(r) \psi(r)}''
+\\\implies g(r) \psi(r) = \brackets{h(r) \psi(r)}'
+\]
+due to boundary conditions. Setting $y(r) = h(r) \psi(r)$ we get
+\[
+y' = \frac{g}{h} y \implies (\ln(y))' = \frac{g}{h}
+\\ \implies y(r) = C \exp\paren*{ \int \frac{g(r)}{h(r)}\diff r }
+\\ \implies \psi(r) = \frac{C}{h(r)} \exp\paren{ \int \frac{g(r)}{h(r)}\diff r }
+\]
+i.e.
+\[
+\psi(r) = \frac{C}{r(1-r)} \exp\paren{ \int \frac{a(rs, (1-r)s)}{r(1-r)s}\diff r }
+\]
+
+
+\section*{Conclusion}
+For the wealth distribution model discussed in ..., in the case of nonzero propensity i.e. if the agents save any money there do not exist any product stationary measures.
+
+
+
+
+\end{document}
