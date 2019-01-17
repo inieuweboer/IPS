@@ -1,4 +1,4 @@
-\documentclass[9pt]{beamer}
+\documentclass[9pt, handout]{beamer}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -12,8 +12,6 @@
 \usetheme[progressbar=frametitle]{metropolis}
 \usepackage{appendixnumberbeamer}
 
-\usepackage{hyperref}
-
 \usepackage{booktabs}
 % \usepackage[scale=2]{ccicons}
 
@@ -26,19 +24,18 @@
 
 \usepackage{caption}
 % \usepackage{pgffor}
+
 \usepackage{csquotes}
 \usepackage{ragged2e}
 \usepackage[
-    % backend=bibtex,
+    % niks qua stijl enzo lijkt het beste
     backend=biber,
-    % bibencoding=ascii,  % FOR SOME REASON THIS MUST BE DISABLE
-    % style=numeric,
-    style=alphabetic,
-    % citestyle=authoryear 
-    citestyle=authoryear-icomp
-    % sorting=none,
+    maxbibnames=99,
 ]{biblatex}
 \addbibresource{refs.bib}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+\usepackage{hyperref}
 
 
 % \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
@@ -79,9 +76,8 @@
 \begin{frame}{Introduction}
     \begin{itemize}
     \item Econophysics is a research field applying methods and ideas of statistical physics to economics
-    \item Interest for economics from people originating from mathematics and physics is not new; for example Daniel Bernoulli, Jan Tinbergen -- see also \citeauthorfoot{yakovenko2009colloquium} for more examples
-    \item This presentation will focus on concepts and results from \citeauthorfoot{cirillo2014duality}
-    
+    \item Interest for economics from people originating from mathematics and physics is not new; for example Daniel Bernoulli, Jan Tinbergen -- see also \authorfootcite{yakovenko2009colloquium} for more examples
+    \item This presentation will focus on concepts and results from \authorfootcite{cirillo2014duality}
     \end{itemize}
 \end{frame}
 
@@ -95,6 +91,17 @@
     % \item Also need to take care about language one uses -- one may still end up unconsciously make light political statements (?)
     % \item Hereby a warning to the listener to make sure the speaker does not cross these boundaries
 \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Concepts}
+\begin{itemize}
+    \item Money: Medium of exchange, store of value, unit of account (including debt)
+    \item Wealth: Total of assets measured in monetary value
+    \item Income: sum of all earnings over given period of time
+    \item Propensity to save: 
+\end{itemize}
+For example, one theoretical model in \cite{yakovenko2009colloquium} argues money is analogous to energy and income is analogous to power (energy per unit of time).
 \end{frame}
 
 
@@ -116,7 +123,7 @@
 
 \begin{frame}{Diffusion process}
 \begin{itemize}
-    \item 
+    \item \authorcite{yakovenko2009colloquium} also mentions the Fokker--Planck equation in setting for income distributions
 \end{itemize}
 \end{frame}
 
@@ -126,12 +133,21 @@
 \begin{frame}{Wrapping up}
   \begin{block}{Summary}
     \begin{itemize}
-    \item 
+    \item A class of energy and wealth distribution models have been described
+    \item With nonzero saving propensity these distributions do not have invariant measures
+    \item A class of associated diffusion processes exist
+    \item A generalized model for $N$ agents is explored
+    \end{itemize}
+  \end{block}
+  \begin{block}{Further reading}
+    \begin{itemize}
+    \item \authorcite{chakrabarti2013econophysics} has an overview of econophysical models of income and wealth distributions
+    \item Further work building on paper discussed can be found through the citations: \url{https://scholar.google.com/scholar?cites=17345843713482550092}
     \end{itemize}
   \end{block}
   \pause
   \begin{center}
-  \vspace{5em}
+%   \vspace{1em}
   \huge{
   Thank you for your attention!
   }

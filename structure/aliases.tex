@@ -7,7 +7,8 @@
 % % \usepackage{algpseudocode}
 % \usepackage{interval}
 
-\newcommand*{\citeauthorfoot}[1]{\citeauthor{#1}\footfullcite{#1}} 
+\newcommand*{\authorfootcite}[1]{\citeauthor{#1}\footfullcite{#1}} 
+\newcommand*{\authorcite}[1]{\citeauthor{#1}\cite{#1}} 
 
 
 \def\[#1\]{\begin{align*}#1 \end{align*}}  % Can do newlines in \[ \] env

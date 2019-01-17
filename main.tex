@@ -15,14 +15,37 @@
 \usepackage{csquotes}
 \usepackage{ragged2e}
 \usepackage[
-    backend=bibtex,
-    % bibencoding=ascii,  % FOR SOME REASON THIS MUST BE DISABLE
-    % citestyle=authoryear 
-    citestyle=authoryear-icomp
-    % style=numeric,
-    style=alphabetic,
-    % sorting=none,
+  % niks qua stijl enzo lijkt het beste
+  backend=biber,
 ]{biblatex}
+\addbibresource{refs.bib}
+
+% Hyperref als bijna laatste
+\usepackage{hyperref}
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor={red!50!black},
+%     citecolor={blue!50!black},
+%     urlcolor={blue!80!black},
+% }
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor={black},
+%     citecolor={black},
+%     urlcolor={blue!80!black},
+% }
+\hypersetup{
+    colorlinks=true,
+    linkcolor={black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black},
+}
+%\usepackage{fncylab}
+
+% \addto\extrasenglish{\def\chapterautorefname{chapter}}
+% \addto\extrasenglish{\def\sectionautorefname{section}}
+% \usepackage[nameinlink, noabbrev]{cleveref}  % lowercase
+
 
 
 
@@ -34,16 +57,23 @@
 
 \maketitle
 
-\url{https://arxiv.org/abs/0905.1518}
-\url{https://arxiv.org/abs/1309.3916}
-\url{https://arxiv.org/abs/1802.07068}
-\url{https://arxiv.org/abs/1811.05206}
+% \url{https://arxiv.org/abs/0905.1518} %yakovenko
+% \url{https://arxiv.org/abs/1309.3916} %redig
 
-http://www.math.wisc.edu/~shottovy/NumPDEreport.pdf
+% not directly related, from sociophysics
+% \url{https://arxiv.org/abs/1802.07068} % Talent vs Luck: the role of randomness in success and failure
+% \url{https://arxiv.org/abs/1811.05206} %Exploring the role of talent and luck in getting success
 
 % https://en.yaronshemesh.com/inequality/
 % https://smus.com/simulating-wealth-inequality/
 % http://borismus.github.io/inequality-simulator/?model=1-world-income-ineq-doesnt-lead-to-wealth-ineq.js
+
+
+%further reading by Redig
+% \url{https://arxiv.org/abs/1508.04918}
+% \url{https://arxiv.org/abs/1606.08692}
+
+
 
 
 
@@ -51,7 +81,7 @@ http://www.math.wisc.edu/~shottovy/NumPDEreport.pdf
 \section*{Introduction}
 Wealth distributions ...
 
-The topic arises in a context of interacting particle systems, described by T. Liggett \ref{liggett2012interacting}\ref{liggett2013stochastic}. For an overview of applications of interacting particle systems see also the list given in \ref{frankredig2014}.
+The topic arises in a context of interacting particle systems, described in detail in  \cite{liggett2012interacting, liggett2013stochastic}. For an overview of applications of interacting particle systems see also the list given in \cite{frankredig2014}.
 
 
 
@@ -81,16 +111,57 @@ R_{n+1} = \lambda r_n + (1-\lambda)\epsilon_n
 \]
 which gives us the unique stationary distribution for $L$ $\nu_{\infty}$
 
-\hdots
 
 
 \section{Duality}
-% https://www.researchgate.net/profile/Anja_Voss-Boehme/publication/261811929_On_the_Equivalence_Between_Liggett_Duality_of_Markov_Processes_and_the_Duality_Relation_Between_Their_Generators/links/00b7d5358d931ad3c6000000/On-the-Equivalence-Between-Liggett-Duality-of-Markov-Processes-and-the-Duality-Relation-Between-Their-Generators.pdf
+The following theorem is adapted from \cite{barbour2000transition}.
+
+Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$. Let $f_{\eta} \colon \Omega \to \Omega$. Assume
+\[
+L f_{\eta} = \sum_{\zeta} r(\eta, \zeta) f_{\zeta}
+\]
+for rates $r(\eta, \zeta) \ge 0$ if $\eta \ne \zeta$ and $r(\eta, \eta) \le 0$ for all $\eta$.
+
+Define a generator $Q$ on a discrete state space $\Omega'$ by
+\[
+q(\eta, \zeta) \defeq r(\eta, \zeta)\frac{\mu(f_{\zeta})}{\mu(f_{\eta})}.
+\]
+Note that these indeed are rates as
+\[
+\sum_{\zeta} q(\eta, \zeta)
+= \frac{1}{\mu(f_{\eta})} \sum_{\zeta} r(\eta, \zeta)\mu(f_{\zeta})
+= \frac{1}{\mu(f_{\eta})} \mu\paren*{\sum_{\zeta} r(\eta, \zeta) f_{\zeta}}
+= \frac{1}{\mu(f_{\eta})} \mu(L f_{\eta})
+= 0.
+\]
+Let $(X_t')_t$ be the associated Markov process. We then have duality with the duality function
+\[
+D(\eta, x) = \frac{f_{\eta}}{\mu(f_{\eta})}
+\]
+as
+\[
+LD(\eta, \cdot)(x)
+= \frac{f_{\eta}(x)}{\mu(f_{\eta})}
+= \sum_{\zeta} \frac{r(\eta, \zeta)}{\mu(f_{\eta})} f_{\zeta}(x)
+= \sum_{\zeta} \frac{q(\eta, \zeta)}{\mu(f_{\zeta})} f_{\zeta}(x)
+= \sum_{\zeta} q(\eta, \zeta) D(\zeta, x)
+= Q D(\cdot, x)(\eta)
+\]
+which implies $\exp(tL) D(\eta, \cdot)(x) = \exp(tQ) D(\cdot, x)(\eta)$ (the proof of this detail is technical, see \cite{voss2011equivalence} for a proof), which in turn implies (by definition) % https://www.researchgate.net/profile/Anja_Voss-Boehme/publication/261811929_On_the_Equivalence_Between_Liggett_Duality_of_Markov_Processes_and_the_Duality_Relation_Between_Their_Generators/links/00b7d5358d931ad3c6000000/On-the-Equivalence-Between-Liggett-Duality-of-Markov-Processes-and-the-Duality-Relation-Between-Their-Generators.pdf
+\[
+\ye{x}{D(\alpha, x_t}
+= \ye{\alpha}{D(\alpha_t, x}.
+\]
+
+
+One can wonder whether there is a correspondence between duality of Markov processes and duality in the sense of dual spaces and adjoints of operators -- there happens to be one, explored in \cite{2012arXiv1210.7193J}. % https://arxiv.org/pdf/1210.7193.pdf
+
 
 
 
 \section{Diffusion}
 
+% http://www.math.wisc.edu/~shottovy/NumPDEreport.pdf
 % https://www.math.nyu.edu/faculty/goodman/teaching/StochCalc2013/notes/Week9.pdf
 
 Let $\mu(r) = \frac{a(rs, (1-r)s)}{s}, h(r) = \frac{\sigma(r)^2}{2}=(1-r)r$
@@ -103,7 +174,7 @@ The density corresponding to the stationary distribution of a process with gener
 = \mu(r) \partial_r + \frac{\sigma(r)^2}{2} \partial_r^2
 = \mu(r) \partial_r + h(r) \partial_r^2
 \]
-of a diffusion process satisfies the Kolmogorov forward equation (also called the Fokker--Planck equation, see also the Feynman--Kac equation corresponding to the backward equation):
+of a diffusion process satisfies the Kolmogorov forward equation (also called the Fokker--Planck equation): %, see also the Feynman--Kac equation corresponding to the backward equation):
 \[
 0 = -\brackets{g(r) \psi(r)}' + \brackets{h(r) \psi(r)}''
 \\\implies g(r) \psi(r) = \brackets{h(r) \psi(r)}'
@@ -125,5 +196,6 @@ For the wealth distribution model discussed in ..., in the case of nonzero prope
 
 
 
+\printbibliography
 
 \end{document}
