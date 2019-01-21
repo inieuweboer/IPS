@@ -74,6 +74,7 @@
 % \url{https://arxiv.org/abs/1606.08692}
 
 
+% \nocite{*}
 
 
 
@@ -83,9 +84,59 @@ Wealth distributions ...
 
 The topic arises in a context of interacting particle systems, described in detail in  \cite{liggett2012interacting, liggett2013stochastic}. For an overview of applications of interacting particle systems see also the list given in \cite{frankredig2014}.
 
+For an historical overview of econophysics, see \cite{2008arXiv0802.1416D, 2011arXiv1108.0977S}
+
+After discussing the preliminaries from \cite{frankredig2014} in \autoref{sec:Preliminaries}, ...
 
 
-\section{Preliminaries}
+\section{Preliminaries}%\label{prelim}
+Beta distribution
+
+Define the Beta function as
+\[
+B(\alpha, \beta)
+= \int_{0}^{1} t^{\alpha-1} (1-t)^{\beta-1} \diff t
+\]
+Define the Gamma function for $\operatorname*{Re}(z) > 0$:
+\[
+\Gamma(z)
+= \int_{0}^{\infty} t^{z-1} \exp(-t) \diff t
+\]
+This is mostly known as the real and complex analytical continuation of the factiorial function -- we have for a positive integer $n$ that $\Gamma(n) = (n-1)!$. Using this the function can even be defined for all $z \not \in \zz_{\le 0}$, although this will not be used.
+
+We have the identity
+\[
+B(\alpha, \beta)
+= \frac{\Gamma(\alpha) \Gamma(\beta)}{\Gamma(\alpha + \beta)}
+\]
+
+The Beta distribution is characterized by probability density $p \colon [0, 1] \to \rr_{\ge 0}$ such that
+\[
+p(x) \propto x^{\alpha - 1} (1-x)^{\beta - 1}.
+\]
+Normalizing gives
+\[
+p(x) = \frac{1}{B(\alpha, \beta)} x^{\alpha - 1} (1-x)^{\beta - 1}.
+\]
+
+Note that the uniform distribution is a special case of the Beta distribution with $\alpha = \beta = 1$.
+
+
+The Gamma distribution is characterized by probability density $p \colon \rr_{>0} \to \rr_{\ge 0}$ such that
+\[
+p(x) \propto x^{\alpha - 1} \exp\paren{-\lambda x}.
+\]
+The parameters $\alpha, \lambda$ are called the \emph{shape} and \emph{rate} respectively. Normalizing gives
+\[
+p(x) = \frac{\lambda^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} \exp\paren{-\lambda x}.
+\]
+
+For $X \sim \Gamma(\alpha, \lambda)$
+\[
+\xe{X^n}
+= \frac{\Gamma(\alpha + n))}{\lambda^{\alpha} \Gamma(\alpha)}
+\]
+
 
 
 \section{Product measures}
@@ -96,12 +147,59 @@ Under redistribution model with kernel $\mu$,
 \nu(a, s) = \frac{ \mu(as, (1-a)s) }{\int_0^1 \mu(\alpha s, (1-\alpha)s) \diff \alpha}
 \]
 
+We prove this by showing that if $\mu$ is an invariant measure, then for all bounded continuous $f$
+\[
+\int_0^{\infty} \int_0^1 f(rs, (1-r)s) \mu(rs, (1-r)s) s \diff r \diff s
+% = \int_0^{\infty} \int_0^1 f(rs, (1-r)s) \int_0^1 \mu(\epsilon s, (1-\epsilon) s) \nu(s, r) s \diff r \diff s;
+&= \int_0^{\infty} \int_0^{1} f(r s, (1-r) s) \paren*{ \int_{0}^{1} \mu(\epsilon s, (1-\epsilon) s)\diff \epsilon} \nu(s, r)s \diff r \diff s;
+\]
+this implies immediately that
+\[
+\mu(r s, (1-r) s) = 
+\int_0^1 \mu(\epsilon s, (1-\epsilon) s) \nu(s, r)
+\implies
+\nu(s, r)
+\propto \mu(r s, (1-r) s).
+\]
+This is done by combining the following three (strings of) equations, with one application of Fubini:
+\[
+\mu(Pf)
+&= \mu(f)
+\\
+\mu(f)
+&= \int_0^{\infty} \int_0^{\infty} f(x, y) \mu(\diff x, \diff y)
+= \int_0^{\infty} \int_0^{1} f(rs, (1-r)s) \mu(rs, (1-r)s) s \diff r \diff s
+\\
+\mu(Pf)
+&= \int_0^{\infty} \int_0^{\infty} Pf(x, y) \mu(\diff x, \diff y)
+\\&= \int_0^{\infty} \int_0^{\infty} \int_{0}^{1} f(\epsilon (x+y), (1-\epsilon) (x+y)) \nu(x+y, \diff\epsilon)  \mu(x, y) \diff x \diff y
+\\&= \int_0^{\infty} \int_0^{1} \int_{0}^{1} f(\epsilon s, (1-\epsilon) s) \nu(s, \epsilon)\diff \epsilon  \mu(rs, (1-r) s) s \diff r \diff s
+\\&= \int_0^{\infty} \int_0^{1} \int_{0}^{1} f(r s, (1-r) s) \nu(s, r)\diff r  \mu(\epsilon s, (1-\epsilon) s) s \diff \epsilon \diff s
+\\&= \int_0^{\infty} \int_0^{1} f(r s, (1-r) s) \paren*{ \int_{0}^{1} \mu(\epsilon s, (1-\epsilon) s)\diff \epsilon} \nu(s, r)s \diff r \diff s.
+\]
+The other implication follows easily by combining these equations in the reverse direction.
+
+Reversible:
+\[
+\mu(Pf \cdot g)
+&= \int_0^{\infty} \int_0^{\infty} Pf(x, y) g(x, y) \mu(x, y) \diff x \diff y
+\\&= \int_0^{\infty} \int_0^{\infty} \int_0^1 f(\epsilon (x+y), (1-\epsilon) (x+y)) \diff \epsilon g(x, y) \mu(x, y) \diff x \diff y
+\\&= \int_0^{\infty} \int_0^{1} \int_0^1 f(\epsilon s, (1-\epsilon) s)  \diff \epsilon g(rs, (1-r)s) \mu(rs, (1-r) s) s \diff r \diff s
+\\&= \int_0^{\infty} \int_0^{1} \int_0^1 f(r s, (1-r) s)  \diff r g(\epsilon s, (1-\epsilon)s) \mu(\epsilon s, (1-\epsilon)s) s \diff \epsilon \diff s
+\\&= \int_0^{\infty} \int_0^{1} \int_0^1 g(\epsilon s, (1-\epsilon) s)  \diff \epsilon f(rs, (1-r)s) \mu(rs, (1-r) s) s \diff r \diff s
+\\&= \mu(Pg \cdot f)
+\]
+
+
 \section{Stationary for wealth dist}
 
+As the wealth distribution model is analogeous to a continuous random walk, jumping after an $\operatorname*{Exp}(1)$ waiting time, we have that
 \[
-Lf(r) = \int \paren[\big]{f(\lambda r + (1 - \lambda)\epsilon) - f(r) } \diff \nu(\epsilon)
+Lf(r)
+= \int \paren[\big]{f(T_{\lambda, \epsilon(r)}) - f(r) } \diff \nu(\epsilon)
+= \int \paren[\big]{f(\lambda r + (1 - \lambda)\epsilon) - f(r) } \diff \nu(\epsilon)
 \]
-must be stationary under iteration
+must be stationary under iteration of the jump process, i.e. the stationary measure is given by the one that stays invariant under iteration $R_{n+1} = T_{\lambda, \epsilon(R_n)}$. Writing out we have
 \[
 R_{n+1} = \lambda r_n + (1-\lambda)\epsilon_n
 \\= \lambda^{n+1} + (1-\lambda)\sum_{k=0}^n \lambda^{k} \epsilon_{n-k}
@@ -109,30 +207,24 @@ R_{n+1} = \lambda r_n + (1-\lambda)\epsilon_n
 \to 
  (1-\lambda)\sum_{k=0}^{\infty} \lambda^{k} \epsilon_{k}
 \]
-which gives us the unique stationary distribution for $L$ $\nu_{\infty}$
+which gives us the unique stationary distribution$\nu_{\infty}$ for $L$.
 
 
 
 \section{Duality}
 The following theorem is adapted from \cite{barbour2000transition}.
 
-Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$. Let $f_{\eta} \colon \Omega \to \Omega$. Assume
+Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$. Let $f_{\eta} \colon \Omega \to \Omega$, for $\eta$ from a discrete state space $\Omega'$. Assume
 \[
 L f_{\eta} = \sum_{\zeta} r(\eta, \zeta) f_{\zeta}
 \]
-for rates $r(\eta, \zeta) \ge 0$ if $\eta \ne \zeta$ and $r(\eta, \eta) \le 0$ for all $\eta$.
-
-Define a generator $Q$ on a discrete state space $\Omega'$ by
+holds for rates $r(\eta, \zeta) \ge 0$ if $\eta \ne \zeta$ and $r(\eta, \eta) \le 0$ for all $\eta$.  Define a generator $Q$ on $\Omega'$ by
 \[
 q(\eta, \zeta) \defeq r(\eta, \zeta)\frac{\mu(f_{\zeta})}{\mu(f_{\eta})}.
 \]
 Note that these indeed are rates as
 \[
-\sum_{\zeta} q(\eta, \zeta)
-= \frac{1}{\mu(f_{\eta})} \sum_{\zeta} r(\eta, \zeta)\mu(f_{\zeta})
-= \frac{1}{\mu(f_{\eta})} \mu\paren*{\sum_{\zeta} r(\eta, \zeta) f_{\zeta}}
-= \frac{1}{\mu(f_{\eta})} \mu(L f_{\eta})
-= 0.
+\sum_{\zeta} q(\eta, \zeta) = \frac{1}{\mu(f_{\eta})} \sum_{\zeta} r(\eta, \zeta)\mu(f_{\zeta}) = \frac{1}{\mu(f_{\eta})} \mu\paren*{\sum_{\zeta} r(\eta, \zeta) f_{\zeta}} = \frac{1}{\mu(f_{\eta})} \mu(L f_{\eta}) = 0.
 \]
 Let $(X_t')_t$ be the associated Markov process. We then have duality with the duality function
 \[
@@ -147,48 +239,106 @@ LD(\eta, \cdot)(x)
 = \sum_{\zeta} q(\eta, \zeta) D(\zeta, x)
 = Q D(\cdot, x)(\eta)
 \]
-which implies $\exp(tL) D(\eta, \cdot)(x) = \exp(tQ) D(\cdot, x)(\eta)$ (the proof of this detail is technical, see \cite{voss2011equivalence} for a proof), which in turn implies (by definition) % https://www.researchgate.net/profile/Anja_Voss-Boehme/publication/261811929_On_the_Equivalence_Between_Liggett_Duality_of_Markov_Processes_and_the_Duality_Relation_Between_Their_Generators/links/00b7d5358d931ad3c6000000/On-the-Equivalence-Between-Liggett-Duality-of-Markov-Processes-and-the-Duality-Relation-Between-Their-Generators.pdf
+which implies
+$\exp(tL) D(\eta, \cdot)(x) = \exp(tQ) D(\cdot, x)(\eta)$
+(the proof of this detail is technical, see \cite{voss2011equivalence} for a proof), which in turn implies (by definition) % https://www.researchgate.net/profile/Anja_Voss-Boehme/publication/261811929_On_the_Equivalence_Between_Liggett_Duality_of_Markov_Processes_and_the_Duality_Relation_Between_Their_Generators/links/00b7d5358d931ad3c6000000/On-the-Equivalence-Between-Liggett-Duality-of-Markov-Processes-and-the-Duality-Relation-Between-Their-Generators.pdf
 \[
-\ye{x}{D(\alpha, x_t}
-= \ye{\alpha}{D(\alpha_t, x}.
+\ye{X}{D(\eta, X_t}
+= \ye{\eta}{D(\eta_t, x}.
 \]
 
 
-One can wonder whether there is a correspondence between duality of Markov processes and duality in the sense of dual spaces and adjoints of operators -- there happens to be one, explored in \cite{2012arXiv1210.7193J}. % https://arxiv.org/pdf/1210.7193.pdf
+One can wonder whether there is a correspondence between duality of Markov processes and duality in the sense of dual spaces and adjoints of operators -- there happens to be one, explored in \cite{jansen2014notion}. %\cite{2012arXiv1210.7193J}. % https://arxiv.org/pdf/1210.7193.pdf
 
 
 
 
 \section{Diffusion}
 
+We have
+\[
+\partial_x
+= \frac{\partial r}{\partial x}\partial_r + \frac{\partial s}{\partial x}\partial_s
+= \frac{s - x}{s^2}\partial_r + \partial_s
+\\\partial_y
+= \frac{\partial r}{\partial y}\partial_r + \frac{\partial s}{\partial y}\partial_s
+= \frac{0 - x}{s^2}\partial_r + \partial_s
+\]
+and hence
+\[
+\partial_x - \partial_y
+= \frac{s - x + x}{x^2}\partial_r
+= \frac{1}{s}\partial_r
+\]
+
 % http://www.math.wisc.edu/~shottovy/NumPDEreport.pdf
 % https://www.math.nyu.edu/faculty/goodman/teaching/StochCalc2013/notes/Week9.pdf
 
-Let $\mu(r) = \frac{a(rs, (1-r)s)}{s}, h(r) = \frac{\sigma(r)^2}{2}=(1-r)r$
+One can consider duality pairings (in the functional setting) between functions $f \in D(L)$ and probability measures $\mu$ on the underlying state space. Suppose that $\mu$ is absolutely continuous, i.e. $\mu(\diff r) = \psi(r) \diff r$. The duality pairing is then between functions $f$ and densities $\psi$. We have
+\[
+0 = \angles{\psi, Lf} = \angles{L^* \psi, f}.
+\]
+
+Let $\mu(r) = \frac{a(rs, (1-r)s)}{s}, h(r) = \frac{\sigma(r)^2}{2}=(1-r)r$.
 
 Probability density should go to zero approaching the boundary points (in this case $0, 1$) 
 
 The density corresponding to the stationary distribution of a process with generator
 \[
-(L_s^r \cdot)(r)
+(L_s \cdot)(r)
 = \mu(r) \partial_r + \frac{\sigma(r)^2}{2} \partial_r^2
 = \mu(r) \partial_r + h(r) \partial_r^2
 \]
-of a diffusion process satisfies the Kolmogorov forward equation (also called the Fokker--Planck equation): %, see also the Feynman--Kac equation corresponding to the backward equation):
+of a diffusion process satisfies the Kolmogorov forward equation (also called the Fokker--Planck equation):
+\[
+\angles{\psi, Lf}
+&= \int \paren{\mu(r) \partial_r + h(r) \partial_r^2} f(r) \psi(r) \diff r
+\\&= \int \mu(r) \psi(r) \partial_r \brackets{f(r)} \diff r + \int h(r) \psi(r) \partial_r^2\brackets{f(r)} \diff r
+\\&= -\int \partial_r \brackets{\mu(r) \psi(r)} f(r) \diff r + (-1)^2\int \partial_r^2 \brackets{h(r) \psi(r)} f(r) \diff r
+\\&= \int \paren{ -\partial_r \brackets{\mu(r) \psi(r)} + \partial_r^2 \brackets{h(r) \psi(r)}} f(r) \diff r
+= \angles{L^* \psi, f}
+\]
+Hence invariance of $\mu$, i.e. $0 = \mu(Lf) = \angles{\psi, Lf} = \angles{L^* \psi, f}$ for all $f$ implies
+%, see also the Feynman--Kac equation corresponding to the backward equation):
 \[
 0 = -\brackets{g(r) \psi(r)}' + \brackets{h(r) \psi(r)}''
 \\\implies g(r) \psi(r) = \brackets{h(r) \psi(r)}'
 \]
-due to boundary conditions. Setting $y(r) = h(r) \psi(r)$ we get
+where the constant is zero due to the absorbing boundary conditions; for any $r'$ outside of the support we have $0 = g(r') \psi(r') = \brackets{g(r') \psi(r')}' + C = 0 + C$. Now setting $y(r) = h(r) \psi(r)$ we get
 \[
-y' = \frac{g}{h} y \implies (\ln(y))' = \frac{g}{h}
-\\ \implies y(r) = C \exp\paren*{ \int \frac{g(r)}{h(r)}\diff r }
-\\ \implies \psi(r) = \frac{C}{h(r)} \exp\paren{ \int \frac{g(r)}{h(r)}\diff r }
+y' = \frac{\mu}{h} y \implies (\ln(y))' = \frac{\mu}{h}
+\\ \implies y(r) = C \exp\paren*{ \int \frac{\mu(r)}{h(r)}\diff r }
+\\ \implies \psi(r) = \frac{C}{h(r)} \exp\paren{ \int \frac{\mu(r)}{h(r)}\diff r }
 \]
 i.e.
 \[
-\psi(r) = \frac{C}{r(1-r)} \exp\paren{ \int \frac{a(rs, (1-r)s)}{r(1-r)s}\diff r }
+\psi(r) = \frac{C}{r(1-r)} \exp\paren*{ \int \frac{a(rs, (1-r)s)}{r(1-r)s}\diff r }
 \]
+
+
+\section{The wealth distribution model for $N$ agents}
+
+... the fact that this is the generator of a finite state-space Markov process was established in equation (17) section 2.2 of \cite{frankredig2014}.
+
+% Now as $\exp(tL) = S_t f(x) = \ye{x}{f(X_t)}$ and $\frac{\partial}{\partial_t} S_t = A S_t$ we have with $\psi() \defeq S_t f_i(x)$ that ...
+Define $\bar{f}_x(i) = f_i(x)$, a function $\itern \to \rr$. This is a function the generator $A$ of the continuous random walk $(\mathcal{X}_t)_t$ works on. We have
+\[
+Lf_i(x) = (1 - \lambda) A \bar{f}_x(i)
+\\\implies
+\exp(tL)f_i(x) = \exp((1 - \lambda)t A) \bar{f}_x (i)
+\\\implies
+S_t f_i(x) = P_{(1 - \lambda)t} \bar{f}_x(i)
+\\\implies
+\ye{x}{f_i(x(t))} = \mathcal{E}_i\brackets{\bar{f}_x(\mathcal{X}_{(1-\lambda)t})}
+\\\implies
+\ye{x}{x_i(t)} = \mathcal{E}_i\brackets{x_{\mathcal{X}_{(1-\lambda)t}}}
+\]
+Note we again used the technical result from \cite{voss2011equivalence}.
+
+
+\section*{Further reading}
+An overview of other models for wealth and income distributions can be found in \cite{chakrabarti2013econophysics}. Further work by one of the authors of \cite{cirillo2014duality} in the econophysics of income and wealth distributions is for example found in \cite{redig2015multilinearity, 2008arXiv0802.1416D, redig2017generalized}.
+
 
 
 \section*{Conclusion}

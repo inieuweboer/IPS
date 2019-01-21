@@ -28,7 +28,8 @@
 \usepackage{csquotes}
 \usepackage{ragged2e}
 \usepackage[
-    % niks qua stijl enzo lijkt het beste
+    % style=numeric,
+    % citestyle=authoryear-icomp,
     backend=biber,
     maxbibnames=99,
 ]{biblatex}
@@ -100,30 +101,198 @@
     \item Wealth: Total of assets measured in monetary value
     \item Income: sum of all earnings over given period of time
     \item Propensity to save: 
+    \item Agent: An entity which makes decisions given some model economy. In our case agent behavior is not studied and so no assumptions are made.
 \end{itemize}
-For example, one theoretical model in \cite{yakovenko2009colloquium} argues money is analogous to energy and income is analogous to power (energy per unit of time).
+For example, one theoretical model in \authorcite{yakovenko2009colloquium} argues money is analogous to energy and income is analogous to power (energy per unit of time).
 \end{frame}
 
 
-\begin{frame}{Product measures}
+
+\begin{frame}{Motivation and building block of model}
+Suppose one starts with two agents with wealth $x$ and $y$. One can transfer wealth in one step in the following way for some $\epsilon \in [0, 1]$ (modelling some kind of transaction):
+\[
+% x' = \epsilon x + (1-\epsilon) y
+% \\y' = (1-\epsilon) x + \epsilon y
+x' = \epsilon (x + y)
+\\y' = (1-\epsilon) (x + y)
+\]
+We have $x' + y' = x + y \eqdef s$, a conserved quantity, which occur in physics often (energy, momentum, etc).
+
+Letting $T_{\epsilon}(x,y) = (x', y')$, we have a wealth-conserving map.
+\pause
+One can also consider that agents save a part of their wealth. For this let $\lambda \in [0, 1]$ be the \emph{saving propensity}. This naturally leads to
+\[
+T_{\lambda, \epsilon}(x,y)
+= \lambda (x, y) + (1-\lambda) T_{\epsilon}(x,y)
+\]
+which is still wealth-conserving.
+\end{frame}
+
+
+
+\begin{frame}{Motivation and building block of model}
+\[
+T_{\lambda, \epsilon}(x,y)
+&= \lambda (x, y) + (1-\lambda) T_{\epsilon}(x,y)
+\\&= \lambda (x, y) + (1-\lambda) (\epsilon (x + y), (1-\epsilon)(x + y))
+\]
+
+The paper refers to the case $\lambda=0$ as the \emph{energy} distribution model, and the case $\lambda \in (0, 1)$ as the \emph{wealth} distribution model.
+
+At a certain point we let $\epsilon \sim \nu(s, \cdot)$ be distributed along some probability measure.
+
+\end{frame}
+
+
+
+\begin{frame}{Process and generator}
+The model is defined by a Markov process using the one-step redistribution in the same way as a continuous random walk (see lecture notes page 7). The state space is $[0, \infty)^2$ (no debt).
+
+The process has to distribute wealth along the map $T_{\lambda, \epsilon}$ with $\epsilon \sim \nu(s, \cdot)$ with an $\operatorname*{Exp}(1)$ waiting time between each step.
+
+For bounded continuous functions $f$ on this state space we hence let $L = P - I$ be the generator of the Markov process, with
+\[
+Pf(x, y) = \int_0^1 f(T_{\lambda, \epsilon}(x, y)) \nu(x+y, \diff \epsilon)
+\]
+\pause
+i.e.
+\[
+Lf(x, y) = \int_0^1 \paren{f(T_{\lambda, \epsilon}(x, y)) - f(x, y) } \nu(x+y, \diff \epsilon).
+\]
+\end{frame}
+
+
+
+\begin{frame}{Stationary and product measures}
+Recall that a measure $\mu$ is a \emph{stationary} measure for the Markov process if and only if $\mu(Lf) = \int Lf \diff \mu = 0$.
+
+\pause
+
+As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0, \infty)^2 \to \rr_{\ge 0}$. One can wonder whether the stationary measure behaves independently on $x$ and $y$, i.e. if we have $\mu(\diff x, \diff y) = \mu(x, y) \diff x \diff y = \mu(x) \mu(y) \diff x \diff y$ (abuse of notation -- function overloading as both measure and density)
+\end{frame}
+
+
+
+\begin{frame}{Research questions}
 \begin{itemize}
-    \item
+\item What are the stationary distribution in this model?
+\item Can we write the stationary distributions as a product?
+\item Do there exist discrete dual processes (and if yes under which duality functions)?
+\item Can anything be said for $N$ agents?
+\end{itemize}
+% not a physicist but model corresponds to physical model -- references given in paper
+\end{frame}
+
+
+
+\begin{frame}{Finding product distributions in case $\lambda = 0$}
+\begin{itemize}
+    \item For $\lambda = 0$, the measure $\mu$ is invariant if and only if $\nu(s, a) \propto \mu(as, (1-a)s)$.
+    \item If $\mu$ is a product measure and $\nu$ does not depend on $s$, we have $\mu(x) \propto x^{b-1} \exp(-\lambda x)$ (Gamma distribution) and $\nu(s, \epsilon) = \nu(\epsilon) \propto \epsilon^{b-1}(1-\epsilon)^{b-1}$ (Beta distribution).
 \end{itemize}
 \end{frame}
 
 
-\begin{frame}{Duality}
-\begin{theorem}
-\end{theorem}
-\begin{itemize}
-    \item
-\end{itemize}
+\begin{frame}{Proof second statement}
+% board
+\end{frame}
+
+
+\begin{frame}{Duality -- a framework for our case}
+Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$.
+
+Let $f_{\eta} \colon \Omega \to \Omega$, for $\eta$ from a discrete state space $\Omega'$. Assume
+\[
+L f_{\eta} = \sum_{\zeta} r(\eta, \zeta) f_{\zeta}
+\]
+holds for rates $r$ with $r(\eta, \zeta) \ge 0$ if $\eta \ne \zeta$ and $r(\eta, \eta) \le 0$ for all $\eta$. 
+\pause
+Then the following rates define a rate matrix $Q$ on $\Omega'$:
+\[
+q(\eta, \zeta) \defeq r(\eta, \zeta)\frac{\mu(f_{\zeta})}{\mu(f_{\eta})}.
+\]
+% Note that these indeed are rates as
+% \[
+% \sum_{\zeta} q(\eta, \zeta) = \frac{1}{\mu(f_{\eta})} \sum_{\zeta} r(\eta, \zeta)\mu(f_{\zeta}) = \frac{1}{\mu(f_{\eta})} \mu\paren*{\sum_{\zeta} r(\eta, \zeta) f_{\zeta}} = \frac{1}{\mu(f_{\eta})} \mu(L f_{\eta}) = 0.
+% \]
+and the associated Markov process  $(X_t')_t$ is dual to the original process with
+\[
+D(\eta, x) = \frac{f_{\eta}(x)}{\mu(f_{\eta})}
+\]
+% as
+% \[
+% LD(\eta, \cdot)(x)
+% = \frac{f_{\eta}(x)}{\mu(f_{\eta})}
+% = \sum_{\zeta} \frac{r(\eta, \zeta)}{\mu(f_{\eta})} f_{\zeta}(x)
+% = \sum_{\zeta} \frac{q(\eta, \zeta)}{\mu(f_{\zeta})} f_{\zeta}(x)
+% = \sum_{\zeta} q(\eta, \zeta) D(\zeta, x)
+% = Q D(\cdot, x)(\eta)
+% \]
+
+% duality for generator implies duality for semigroup
+which implies
+% $\exp(tL) D(\eta, \cdot)(x) = \exp(tQ) D(\cdot, x)(\eta)$
+\[
+\ye{X}{D(\eta, X_t}
+= \ye{\eta}{D(\eta_t, x}.
+\]
+\end{frame}
+
+
+\begin{frame}{Duality for case $0 < \lambda < 1$}
+Take $f_n(r) = r^n$. Then again taking generator
+\[
+Lf(r)
+= \int_0^1 \paren{f(\lambda r + (1-\lambda) \epsilon) - f(r)} \nu(\diff \epsilon)
+\]
+we get
+\[
+Lf_n(r)
+&= \int_0^1 (\lambda r + (1-\lambda) \epsilon)^n \nu(\diff \epsilon) - f_n(r)
+\\&= \sum_{k=0}^n \lambda^k (1-\lambda)^{n-k} \int_0^1 \epsilon^{n-k} \nu(\diff \epsilon) f_k(r) - f_n(r)
+= \sum_{k=0}^n r(n, k) f_k(r)
+\]
+and as $\nu_{\infty}^{\lambda}$ is the stationary measure, we get $q(k, n) = r(k, n) \frac{\nu_{\infty}^{\lambda}(f_k)}{\nu_{\infty}^{\lambda}(f_n)}$ as rates for the discrete dual process with duality function $D(n, r) = \frac{f_n(r)}{\nu_{\infty}^{\lambda}(f_n)}$.
 \end{frame}
 
 
 \begin{frame}{Diffusion process}
+% The definition of a diffusion process is a Markov process for which the Kolmogorov forward equation is the Fokker--Planck equation.
+
+% model of wealth distribution in microscopic time scales
+In diffusion processes the idea is to consider very small time scales.
+
+We consider the generator
+\[
+Af(x, y) = a(x, y)(\partial_x - \partial_y) + xy (\partial_x - \partial_y)^2
+\]
+Transforming with $s = x+y$ and $r = \frac{x}{s}$ gives
+\[
+Af(r)
+= \frac{a(rs, (1-r)s)}{s}\partial_r + r(1-r) \partial_r^2
+= \mu(r)\partial_r + h(r) \partial_r^2
+\]
+\pause
+The corresponding Fokker-Planck equation is
+\[
+\partial_t \psi(r, t) = 0 =
+- \partial_r\brackets{\mu(r) \psi(r)} + \partial_r^2\brackets{h(r) \psi(r)}.
+\]
+from which we can derive the stationary measure
+\[
+\psi(r) \propto \frac{1}{r(1-r)}\exp\paren*{\int\frac{a(rs, (1-r)s)}{s} \diff r} 
+\]
+Note: \authorcite{yakovenko2009colloquium} also mentions the Fokker--Planck equation in setting for income distributions.
+%example linear case
+\end{frame}
+
+
+
+
+\begin{frame}{Link to statistical physics}
 \begin{itemize}
-    \item \authorcite{yakovenko2009colloquium} also mentions the Fokker--Planck equation in setting for income distributions
+    \item When $\nu(s, \diff \epsilon) = \diff\epsilon$ is uniform, the corresponding physical model is the Kipnis-Marchioro-Presutti model
+    \item When $\nu(s, \diff \epsilon) = \nu(\diff\epsilon)$ is Beta distributed, the corresponding physical model is the thermalized Brownian energy process.
 \end{itemize}
 \end{frame}
 
@@ -135,7 +304,7 @@ For example, one theoretical model in \cite{yakovenko2009colloquium} argues mone
     \begin{itemize}
     \item A class of energy and wealth distribution models have been described
     \item With nonzero saving propensity these distributions do not have invariant measures
-    \item A class of associated diffusion processes exist
+    \item The processes are dual to discrete processes and a class of associated diffusion processes exist
     \item A generalized model for $N$ agents is explored
     \end{itemize}
   \end{block}

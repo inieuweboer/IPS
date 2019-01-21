@@ -17,7 +17,7 @@
 
 
 % Opmaak/indeling
-\usepackage{subfiles}
+% \usepackage{subfiles}
 \usepackage{afterpage}
 \newcommand*{\blankpagenumbered}{ % Skip de nummering op een pagina
   \null\thispagestyle{empty}\newpage
@@ -30,9 +30,6 @@
 \usepackage{subcaption}
 % \usepackage{enumitem}
 
-% \usepackage{geometry}
-% \geometry{letterpaper}
-
 \usepackage{scrhack}
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
@@ -41,6 +38,10 @@
 \usepackage[parfill]{parskip}
 %\usepackage{titlesec} % Start new page with each section
 %\newcommand{\sectionbreak}{\clearpage}
+
+% Autolabel sections
+\let\orisectionmark\sectionmark
+\renewcommand\sectionmark[1]{\label{sec:#1}\orisectionmark{#1}}
 
 % DRAFT WATERMARK
 %     \usepackage[firstpage]{draftwatermark} % adds draft watermark
@@ -95,10 +96,6 @@
 
 
 
-
-
-
-
-
-
-
+% should be after hyperref
+% \usepackage{geometry}
+% \geometry{letterpaper}
