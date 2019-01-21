@@ -86,7 +86,7 @@
 
 \begin{frame}{Mathematical models and scientific method}
 \begin{itemize}
-    \item Model is mathematical 
+    \item Model is mathematical
     \item Need to take care with interpretations and drawing conclusions about the real world -- empirical research is needed for this
     \item Need to take care especially due to the evident link between politics and economics
     % \item Also need to take care about language one uses -- one may still end up unconsciously make light political statements (?)
@@ -100,7 +100,7 @@
     \item Money: Medium of exchange, store of value, unit of account (including debt)
     \item Wealth: Total of assets measured in monetary value
     \item Income: sum of all earnings over given period of time
-    \item Propensity to save: 
+    % \item Propensity to save:
     \item Agent: An entity which makes decisions given some model economy. In our case agent behavior is not studied and so no assumptions are made.
 \end{itemize}
 For example, one theoretical model in \authorcite{yakovenko2009colloquium} argues money is analogous to energy and income is analogous to power (energy per unit of time).
@@ -198,6 +198,18 @@ As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0,
 \end{frame}
 
 
+\begin{frame}{Invariant measures in case $\lambda > 0$}
+\begin{itemize}
+    \item For $\lambda > 0$, the stationary measure can be characterized by the random variable
+        \[
+            \epsilon_{\infty}^{\lambda} = (1-\lambda)\sum_{k \ge 0} \lambda^k \epsilon_k
+        \]
+    \item All invariant measures are of the form $(\epsilon_{\infty}^{\lambda}, 1 - \epsilon_{\infty}^{\lambda}) \cdot S$
+    \item There are no product invariant measures in this case.
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}{Duality -- a framework for our case}
 Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$.
 
@@ -205,19 +217,20 @@ Let $f_{\eta} \colon \Omega \to \Omega$, for $\eta$ from a discrete state space 
 \[
 L f_{\eta} = \sum_{\zeta} r(\eta, \zeta) f_{\zeta}
 \]
-holds for rates $r$ with $r(\eta, \zeta) \ge 0$ if $\eta \ne \zeta$ and $r(\eta, \eta) \le 0$ for all $\eta$. 
+holds for rates $r$ with $r(\eta, \zeta) \ge 0$ if $\eta \ne \zeta$ and $r(\eta, \eta) \le 0$ for all $\eta$.
 \pause
 Then the following rates define a rate matrix $Q$ on $\Omega'$:
 \[
-q(\eta, \zeta) \defeq r(\eta, \zeta)\frac{\mu(f_{\zeta})}{\mu(f_{\eta})}.
+q(\eta, \zeta) \defeq r(\eta, \zeta)\frac{\mu(f_{\zeta})}{\mu(f_{\eta})}. %board
 \]
+\pause
 % Note that these indeed are rates as
 % \[
 % \sum_{\zeta} q(\eta, \zeta) = \frac{1}{\mu(f_{\eta})} \sum_{\zeta} r(\eta, \zeta)\mu(f_{\zeta}) = \frac{1}{\mu(f_{\eta})} \mu\paren*{\sum_{\zeta} r(\eta, \zeta) f_{\zeta}} = \frac{1}{\mu(f_{\eta})} \mu(L f_{\eta}) = 0.
 % \]
 and the associated Markov process  $(X_t')_t$ is dual to the original process with
 \[
-D(\eta, x) = \frac{f_{\eta}(x)}{\mu(f_{\eta})}
+D(\eta, x) = \frac{f_{\eta}(x)}{\mu(f_{\eta})} % board
 \]
 % as
 % \[
@@ -280,10 +293,19 @@ The corresponding Fokker-Planck equation is
 \]
 from which we can derive the stationary measure
 \[
-\psi(r) \propto \frac{1}{r(1-r)}\exp\paren*{\int\frac{a(rs, (1-r)s)}{s} \diff r} 
+\psi(r) \propto \frac{1}{r(1-r)}\exp\paren*{\int\frac{a(rs, (1-r)s)}{s} \diff r} % board
 \]
 Note: \authorcite{yakovenko2009colloquium} also mentions the Fokker--Planck equation in setting for income distributions.
 %example linear case
+\end{frame}
+
+
+
+
+\begin{frame}{Result for $N$ agents}
+\begin{itemize}
+    \item
+\end{itemize}
 \end{frame}
 
 
