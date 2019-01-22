@@ -190,10 +190,39 @@ Reversible:
 \\&= \mu(Pg \cdot f)
 \]
 
+Gamma:
+
+Set $\psi(s) = \int_0^1 \mu(as) \mu((1-a) s) \diff a$. Since $\nu(r) = \nu(1-r)$ we can write $\nu(r) = K(r) K(1-r)$, giving
+\[
+K(r) K(1-r)
+= \frac{\mu(rs) \mu((1-r) s)}{\psi(s)}
+\implies
+\psi(s)
+= \frac{\mu(rs) \mu((1-r) s)}{K(r) K(1-r)}.
+\]
+Taking logarithms and then the derivative w.r.t. $r$ gives
+\[
+\ln\psi(s)
+= \ln(\mu(rs)) + \ln(\mu((1-r) s)) - \ln(K(r)) - \ln(K(1-r))
+\\\implies
+0 = \frac{\mu'(rs) s}{\mu(rs)} + \frac{\mu'((1-r)s) \cdot -s}{\mu((1-r)s)} - \frac{K'(r)}{K(r)} - \frac{K'(1-r)}{K(1-r)}
+\]
+Setting $r=0$ and collecting constants gives
+\[
+&0
+= \frac{\mu'(0)}{\mu(0)} s - \frac{\mu'(s) s}{\mu(s)} + C_2
+= C_1 s - \frac{\mu'(s) s}{\mu(s)} + C_2
+\\\implies & \frac{\mu'(s)}{\mu(s)} s = C_1 s + C_2
+\\\implies & \frac{\mu'(s)}{\mu(s)} = C_1 + \frac{C_2}{s}
+\\\implies & \ln\paren{\mu(s)}' = C_1 + \frac{C_2}{s}
+\\\implies & \ln\paren{\mu(s)} = C_1 s + C_2 \ln\abs{s} + C_3
+\\\implies & \mu(s) \propto s^C_2 \exp(C_1 s) = s^{\alpha - 1} \exp(-\lambda s)
+\]
+
 
 \section{Stationary for wealth dist}
 
-As the wealth distribution model is analogeous to a continuous random walk, jumping after an $\operatorname*{Exp}(1)$ waiting time, we have that
+As the wealth distribution model is takien analogous to a continuous random walk, jumping after an $\operatorname*{Exp}(1)$ waiting time, we have that
 \[
 Lf(r)
 = \int \paren[\big]{f(T_{\lambda, \epsilon(r)}) - f(r) } \diff \nu(\epsilon)
@@ -315,7 +344,7 @@ i.e.
 \]
 
 
-\section{The wealth distribution model for $N$ agents}
+\section[nagents]{The wealth distribution model for $N$ agents}
 
 ... the fact that this is the generator of a finite state-space Markov process was established in equation (17) section 2.2 of \cite{frankredig2014}.
 

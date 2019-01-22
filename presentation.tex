@@ -1,4 +1,4 @@
-\documentclass[9pt, handout]{beamer}
+\documentclass[9pt]{beamer}
 
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -192,7 +192,7 @@ As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0,
 \end{frame}
 
 
-\begin{frame}{Proof second statement}
+\begin{frame}{Proofs}
 % board
 \end{frame}
 
@@ -307,9 +307,34 @@ Note: \authorcite{yakovenko2009colloquium} also mentions the Fokker--Planck equa
 
 
 \begin{frame}{Result for $N$ agents}
-\begin{itemize}
-    \item
-\end{itemize}
+% \begin{itemize}
+%     \item
+% \end{itemize}
+
+Consider set of agents $\brackets{N} \defeq \set{1, 2, \hdots, N}$ and a symmetric random walk $\paren{\mathcal{X}_t}_t$ jumping at rate one according to transition probabilities $p(i,j)$, and (vector) process $x(t)$ of wealth of agents
+
+\pause
+
+Let $T_{\lambda, \epsilon}^{i, j}(x)$ for $x \in [0, \infty)^{\brackets{N}}$ such that
+\[
+T_{\lambda, \epsilon}^{i, j}(x)_k = T_{\lambda, \epsilon}(x_i, x_j)_k
+% equal to \lambda x + (1- \lambda) \cdot (\epsilon OR 1-\epsilon) (x+y)
+T_{\lambda, \epsilon}^{i, j}(x)_k = T_{\lambda, \epsilon}(x_i, x_j)_k
+\]
+
+\pause
+
+The generator then is given by
+\[
+\mathcal{L}f(x) = \sum_{i, j} 2 p(i, j) \int \paren*{f(T_{\lambda, \epsilon}^{i, j}(x)) - f(x)} \nu(x+y, \diff \epsilon)
+\]
+
+\pause
+
+Result:
+\[
+\mathbb{E}_x\brackets{x_i(t)} = \mathcal{E}_i\brackets{x_{\mathcal{X}_{(1-\lambda)t}}}
+\]
 \end{frame}
 
 
@@ -317,8 +342,8 @@ Note: \authorcite{yakovenko2009colloquium} also mentions the Fokker--Planck equa
 
 \begin{frame}{Link to statistical physics}
 \begin{itemize}
-    \item When $\nu(s, \diff \epsilon) = \diff\epsilon$ is uniform, the corresponding physical model is the Kipnis-Marchioro-Presutti model
-    \item When $\nu(s, \diff \epsilon) = \nu(\diff\epsilon)$ is Beta distributed, the corresponding physical model is the thermalized Brownian energy process.
+    \item When $\nu(s, \diff \epsilon) = \diff\epsilon$ is uniform, the case $\lambda=0$ corresponds to the Kipnis-Marchioro-Presutti model
+    \item When $\nu(s, \diff \epsilon) = \nu(\diff\epsilon)$ is Beta distributed, the case $\lambda=0$ corresponds to the thermalized Brownian energy process.
 \end{itemize}
 \end{frame}
 
