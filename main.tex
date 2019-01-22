@@ -49,7 +49,7 @@
 
 
 
-\title{Econophysics and wealth distribution models}
+\title{Stationary distributions and Markov duality of a wealth distribution model}
 \author{Ismani Nieuweboer}
 % \date{September 2018}
 
@@ -246,14 +246,16 @@ must be stationary under iteration of the jump process, i.e. the stationary meas
 R_{n+1} = \lambda r_n + (1-\lambda)\epsilon_n
 \\= \lambda^{n+1} + (1-\lambda)\sum_{k=0}^n \lambda^{k} \epsilon_{n-k}
 \\\overset{\diff}{=} \lambda^{n+1} + (1-\lambda)\sum_{k=0}^n \lambda^{k} \epsilon_{k}
-\to 
+\to
  (1-\lambda)\sum_{k=0}^{\infty} \lambda^{k} \epsilon_{k} \eqdef \epsilon_{\infty}^{\lambda}
 \]
-which gives us the unique stationary distribution $\nu_{\infty}$ for $L$.
+which gives us the unique stationary distribution$\nu_{\infty}^{\lambda}$ for $L$.
 
 
 
 \section{Duality}
+Duality of Markov chains is a concept used to relate two Markov processes with each other. It is especially useful in relating a continuous state space Markov process with a discrete state space one, preserving information but simplifying analysis, especially in the context of simulations.
+
 The following theorem is adapted from \cite{barbour2000transition}.
 
 Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$. Let $f_{\eta} \colon \Omega \to \Omega$, for $\eta$ from a discrete state space $\Omega'$. Assume
@@ -406,8 +408,9 @@ An overview of other models for wealth and income distributions can be found in 
 
 
 
+
 \section*{Conclusion}
-For the wealth distribution model discussed in ..., in the case of nonzero propensity i.e. if the agents save any money there do not exist any product stationary measures.
+For the wealth distribution model discussed, we found that in the case of nonzero propensity i.e. if the agents save any money there do not exist any product stationary measures.
 
 
 
