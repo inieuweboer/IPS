@@ -138,6 +138,16 @@ For $X \sim \Gamma(\alpha, \lambda)$
 \]
 
 
+\section{Research questions
+\begin{itemize}
+\item What are the stationary distribution in this model?
+\item Can we write the stationary distributions as a product?
+\item Do there exist discrete dual processes (and if yes under which duality functions)?
+\item Can anything be said for $N$ agents?
+\end{itemize}
+
+\section{Energy and wealth distribution model}
+
 
 \section{Product measures}
 
@@ -224,11 +234,11 @@ Beta:
 As the assumption is that $\nu$ is independent of $s$, we have
 \[
 \nu(r)
-\propto \mu(r s) \mu((1-r)s)
-\propto (rs)^{\alpha - 1}\exp(-\lambda rs) ((1-r)s)^{\alpha - 1} \exp(-\lambda (1-r)s)
-\propto r^{\alpha - 1} (1-r)^{\alpha - 1} \exp(-\lambda (r + 1 - r)s)
-= r^{\alpha - 1} (1-r)^{\alpha - 1} \exp(-\lambda s)
-\propto r^{\alpha - 1} (1-r)^{\alpha - 1}
+&\propto \mu(r s) \mu((1-r)s)
+\\&\propto (rs)^{\alpha - 1}\exp(-\lambda rs) ((1-r)s)^{\alpha - 1} \exp(-\lambda (1-r)s)
+\\&\propto r^{\alpha - 1} (1-r)^{\alpha - 1} \exp(-\lambda (r + 1 - r)s)
+\\&= r^{\alpha - 1} (1-r)^{\alpha - 1} \exp(-\lambda s)
+\\&\propto r^{\alpha - 1} (1-r)^{\alpha - 1}
 \]
 which means $\nu$ is Beta distributed with both parameters equal to $\alpha$.
 
@@ -292,11 +302,11 @@ $\exp(tL) D(\eta, \cdot)(x) = \exp(tQ) D(\cdot, x)(\eta)$
 = \ye{\eta}{D(\eta_t, x}.
 \]
 
-In the case of $a(x, y) = \alpha(x - y)$ we have
+In the case of $a(x, y) = -\alpha(x - y)$ we have
 \[
 \psi(r)
 &\propto \frac{1}{r(1-r)} \exp\paren*{ \int \frac{-\alpha(r - (1-r)) s}{r(1-r)s} }
-\\&= \frac{1}{r(1-r)} \exp\paren*{ \alpha \int \frac{1 - 2r)}{r(1-r)} }
+\\&= \frac{1}{r(1-r)} \exp\paren*{ \alpha \int \frac{1 - 2r}{r(1-r)} }
 \\&= \frac{1}{r(1-r)} \exp\paren*{ \alpha (\ln(1-r) + \ln(r)) }
 \\&= r^{\alpha - 1} (1-r)^{\alpha - 1}
 \]
@@ -369,6 +379,19 @@ i.e.
 \psi(r) = \frac{C}{r(1-r)} \exp\paren*{ \int \frac{a(rs, (1-r)s)}{r(1-r)s}\diff r }.
 \]
 
+Now as the stationary measure $\mu$ is unique and the same as the stationary measure of the distribution model in the case $\lambda = 0$, we have for the limit of starting the semigroup at an arbitrary point $(x, y)$ that
+\[
+\lim_{t\to\infty} \ye{x, y}{f(X_t, Y_t)}
+= \mu(Pf)
+\]
+and hence for the generator of the original process $\mathcal{L}$
+\[
+\mathcal{L}f(x, y)
+= Pf(x, y) - f(x, y)
+= \lim_{t\to\infty} P_t f(x, y) - f(x, y)
+= \lim_{t\to\infty} \exp(tL) f(x, y) - f(x, y).
+\]
+
 
 \section[nagents]{The wealth distribution model for $N$ agents}
 Consider set of agents $\brackets{N} \defeq \set{1, 2, \hdots, N}$ and a symmetric random walk $\paren{\mathcal{X}_t}_t$ jumping at rate one according to transition probabilities $p(i,j)$, and (vector) process $x(t)$ of wealth of agents
@@ -391,20 +414,20 @@ Define $\bar{f}_x(i) = f_i(x)$, a function $\itern \to \rr$. This is a function 
 We have
 \[
 Lf_i(x) = (1 - \lambda) A \bar{f}_x(i)
-\\\implies
+\implies &
 \exp(tL)f_i(x) = \exp((1 - \lambda)t A) \bar{f}_x (i)
-\\\implies
-S_t f_i(x) = P_{(1 - \lambda)t} \bar{f}_x(i)
-\\\implies
+% \\\implies &
+% S_t f_i(x) = P_{(1 - \lambda)t} \bar{f}_x(i)
+\\\implies &
 \ye{x}{f_i(x(t))} = \mathcal{E}_i\brackets{\bar{f}_x(\mathcal{X}_{(1-\lambda)t})}
-\\\implies
+\\\implies &
 \ye{x}{x_i(t)} = \mathcal{E}_i\brackets{x_{\mathcal{X}_{(1-\lambda)t}}}
 \]
 % Note we again used the technical result from \cite{voss2011equivalence}.
 
 
 \section*{Further reading}
-An overview of other models for wealth and income distributions can be found in \cite{chakrabarti2013econophysics}. Further work by one of the authors of \cite{cirillo2014duality} in the econophysics of income and wealth distributions is for example found in \cite{redig2015multilinearity, 2008arXiv0802.1416D, redig2017generalized}.
+An overview of other models for wealth and income distributions can be found in \cite{chakrabarti2013econophysics}. Further work by one of the authors of \cite{cirillo2014duality} in the econophysics of income and wealth distributions is for example found in \cite{redig2015multilinearity,  redig2017generalized, 2016JSP...163...92V}.
 
 
 

@@ -178,8 +178,6 @@ Lf(x, y) = \int_0^1 \paren{f(T_{\lambda, \epsilon}(x, y)) - f(x, y) } \nu(x+y, \
 \begin{frame}{Stationary and product measures}
 Recall that a measure $\mu$ is a \emph{stationary} measure for the Markov process if and only if $\mu(Lf) = \int Lf \diff \mu = 0$.
 
-\pause
-
 % As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0, \infty)^2 \to \rr_{\ge 0}$.
 One can wonder whether the stationary measure behaves independently on $x$ and $y$, i.e. if we have $\mu(\diff x, \diff y) = \mu(x, y) \diff x \diff y = \mu(x) \mu(y) \diff x \diff y$ (abuse of notation -- function overloading as both measure and density)
 \end{frame}
@@ -230,9 +228,7 @@ One can wonder whether the stationary measure behaves independently on $x$ and $
 \begin{frame}{Duality -- a framework for our case}
 The following is described in \authorcite{barbour2000transition}. Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$.
 
-\pause
-
-Let $f_{\eta} \colon \Omega \to \Omega$, for $\eta$ from a discrete state space $\Omega'$. Assume
+Let $f_{\eta} \colon \Omega \to \Omega$ be nonnegative, for $\eta$ from a discrete state space $\Omega'$. Assume
 \[
 L f_{\eta} = \sum_{\zeta} r(\eta, \zeta) f_{\zeta}
 \]
@@ -288,6 +284,7 @@ and as $\nu_{\infty}^{\lambda}$ is the stationary measure, we get $q(k, n) = r(k
 \end{frame}
 
 
+
 \begin{frame}{Diffusion process}
 % The definition of a diffusion process is a Markov process for which the Kolmogorov forward equation is the Fokker--Planck equation.
 
@@ -299,19 +296,30 @@ We consider the generator
 Af(x, y) = a(x, y)(\partial_x - \partial_y) + xy (\partial_x - \partial_y)^2
 \]
 Transforming with $s = x+y$ and $r = \frac{x}{s}$ gives
+\pause
 \[
 Af(r)
 = \frac{a(rs, (1-r)s)}{s}\partial_r + r(1-r) \partial_r^2
 = \mu(r)\partial_r + h(r) \partial_r^2
 \]
-\pause
+\end{frame}
+
+
+
+\begin{frame}{Diffusion process}
+\[
+Af(r)
+= \frac{a(rs, (1-r)s)}{s}\partial_r + r(1-r) \partial_r^2
+= \mu(r)\partial_r + h(r) \partial_r^2
+\]
 The corresponding Fokker-Planck equation is
+\pause
 \[
 \partial_t \psi(r) = 0 =
 - \partial_r\brackets{\mu(r) \psi(r)} + \partial_r^2\brackets{h(r) \psi(r)}.
 \]
-\pause
 from which we can derive the stationary measure
+\pause
 \[
 \psi(r) \propto \frac{1}{r(1-r)}\exp\paren*{\int\frac{a(rs, (1-r)s)}{s} \diff r} % board
 \]
@@ -342,7 +350,7 @@ T_{\lambda, \epsilon}^{i, j}(x)_k = T_{\lambda, \epsilon}(x_i, x_j)_k
 
 The generator then is given by
 \[
-\mathcal{L}f(x) = \sum_{i, j} 2 p(i, j) \int \paren*{f(T_{\lambda, \epsilon}^{i, j}(x)) - f(x)} \nu(x+y, \diff \epsilon)
+\mathcal{L}f(x) = \sum_{i, j} 2 p(i, j) \int \paren*{f(T_{\lambda, \epsilon}^{i, j}(x)) - f(x)} \nu(\sum_i x_i, \diff \epsilon)
 \]
 
 \pause
@@ -358,8 +366,9 @@ Result -- for $\mathbb{E}$ the expectation of the wealth process and $\mathcal{E
 
 \begin{frame}{Link to statistical physics}
 \begin{itemize}
-    \item When $\nu(s, \diff \epsilon) = \diff\epsilon$ is uniform, the case $\lambda=0$ corresponds to the Kipnis-Marchioro-Presutti model
+    \item When $\nu(s, \diff \epsilon) = \diff\epsilon$ is uniform, the case $\lambda=0$ corresponds to the Kipnis-Marchioro-Presutti model (1982)
     \item When $\nu(s, \diff \epsilon) = \nu(\diff\epsilon)$ is Beta distributed, the case $\lambda=0$ corresponds to the thermalized Brownian energy process.
+    % heat flow
 \end{itemize}
 % not a physicist
 \end{frame}
