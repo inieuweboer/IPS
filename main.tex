@@ -270,26 +270,25 @@ and hence
 = \frac{s - x + x}{x^2}\partial_r
 = \frac{1}{s}\partial_r
 \]
-
-% http://www.math.wisc.edu/~shottovy/NumPDEreport.pdf
-% https://www.math.nyu.edu/faculty/goodman/teaching/StochCalc2013/notes/Week9.pdf
-
-One can consider duality pairings (in the functional setting) between functions $f \in D(L)$ and probability measures $\mu$ on the underlying state space. Suppose that $\mu$ is absolutely continuous, i.e. $\mu(\diff r) = \psi(r) \diff r$. The duality pairing is then between functions $f$ and densities $\psi$. We have
-\[
-0 = \angles{\psi, Lf} = \angles{L^* \psi, f}.
-\]
-
-Let $\mu(r) = \frac{a(rs, (1-r)s)}{s}, h(r) = \frac{\sigma(r)^2}{2}=(1-r)r$.
-
-Probability density should go to zero approaching the boundary points (in this case $0, 1$) 
-
-The density corresponding to the stationary distribution of a process with generator
+This gives
 \[
 (L_s \cdot)(r)
 = \mu(r) \partial_r + \frac{\sigma(r)^2}{2} \partial_r^2
 = \mu(r) \partial_r + h(r) \partial_r^2
 \]
-of a diffusion process satisfies the Kolmogorov forward equation (also called the Fokker--Planck equation):
+% http://www.math.wisc.edu/~shottovy/NumPDEreport.pdf
+% https://www.math.nyu.edu/faculty/goodman/teaching/StochCalc2013/notes/Week9.pdf
+
+Let $\mu(r) = \frac{a(rs, (1-r)s)}{s}, h(r) = \frac{\sigma(r)^2}{2}=(1-r)r$.
+
+% Probability density should go to zero approaching the boundary points (in this case $0, 1$) 
+
+The following is adapted from \cite{jonathangoodman2013}. To calculate the stationanry measure, one can consider duality pairings (in the functional setting) between functions $f \in D(L)$ and probability measures $\mu$ on the underlying state space. Suppose that $\mu$ is absolutely continuous, i.e. $\mu(\diff r) = \psi(r) \diff r$. The duality pairing is then between functions $f$ and densities $\psi$. We have
+\[
+0 = \angles{\psi, Lf} = \angles{L^* \psi, f}.
+\]
+% The density corresponding to the stationary distribution of a process with generator
+Using the generator after the coordinate transform we have
 \[
 \angles{\psi, Lf}
 &= \int \paren{\mu(r) \partial_r + h(r) \partial_r^2} f(r) \psi(r) \diff r
@@ -298,7 +297,7 @@ of a diffusion process satisfies the Kolmogorov forward equation (also called th
 \\&= \int \paren{ -\partial_r \brackets{\mu(r) \psi(r)} + \partial_r^2 \brackets{h(r) \psi(r)}} f(r) \diff r
 = \angles{L^* \psi, f}
 \]
-Hence invariance of $\mu$, i.e. $0 = \mu(Lf) = \angles{\psi, Lf} = \angles{L^* \psi, f}$ for all $f$ implies
+Hence invariance of $\mu$, i.e. $0 = \mu(Lf) = \angles{\psi, Lf} = \angles{L^* \psi, f}$ for all $f$ implies the Kolmogorov forward equation or Fokker--Planck equation:
 %, see also the Feynman--Kac equation corresponding to the backward equation):
 \[
 0 = -\brackets{g(r) \psi(r)}' + \brackets{h(r) \psi(r)}''
@@ -312,7 +311,7 @@ y' = \frac{\mu}{h} y \implies (\ln(y))' = \frac{\mu}{h}
 \]
 i.e.
 \[
-\psi(r) = \frac{C}{r(1-r)} \exp\paren*{ \int \frac{a(rs, (1-r)s)}{r(1-r)s}\diff r }
+\psi(r) = \frac{C}{r(1-r)} \exp\paren*{ \int \frac{a(rs, (1-r)s)}{r(1-r)s}\diff r }.
 \]
 
 

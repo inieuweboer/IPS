@@ -113,8 +113,8 @@ Suppose one starts with two agents with wealth $x$ and $y$. One can transfer wea
 \[
 % x' = \epsilon x + (1-\epsilon) y
 % \\y' = (1-\epsilon) x + \epsilon y
-x' = \epsilon (x + y)
-\\y' = (1-\epsilon) (x + y)
+x' &= \epsilon (x + y)
+\\y' &= (1-\epsilon) (x + y)
 \]
 We have $x' + y' = x + y \eqdef s$, a conserved quantity, which occur in physics often (energy, momentum, etc).
 
@@ -123,8 +123,7 @@ Letting $T_{\epsilon}(x,y) = (x', y')$, we have a wealth-conserving map.
 One can also consider that agents save a part of their wealth. For this let $\lambda \in [0, 1]$ be the \emph{saving propensity}. This naturally leads to
 \[
 T_{\lambda, \epsilon}(x,y)
-= \lambda (x, y) + (1-\lambda) T_{\epsilon}(x,y)
-\]
+= \lambda (x, y) + (1-\lambda) T_{\epsilon}(x,y)\]
 which is still wealth-conserving.
 \end{frame}
 
@@ -210,6 +209,10 @@ As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0,
 \end{frame}
 
 
+\begin{frame}{Proofs}
+\end{frame}
+
+
 \begin{frame}{Duality -- a framework for our case}
 Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$.
 
@@ -288,9 +291,10 @@ Af(r)
 \pause
 The corresponding Fokker-Planck equation is
 \[
-\partial_t \psi(r, t) = 0 =
+\partial_t \psi(r) = 0 =
 - \partial_r\brackets{\mu(r) \psi(r)} + \partial_r^2\brackets{h(r) \psi(r)}.
 \]
+\pause
 from which we can derive the stationary measure
 \[
 \psi(r) \propto \frac{1}{r(1-r)}\exp\paren*{\int\frac{a(rs, (1-r)s)}{s} \diff r} % board
