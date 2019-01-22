@@ -74,6 +74,19 @@
 
 % \section{Introduction}
 
+\begin{frame}{}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{bitcoin}
+    % \caption{Caption}
+    % \label{fig:my_label}
+    
+    \url{https://web.archive.org/web/20180501165520/https://arewedecentralizedyet.com/}
+\end{figure}
+    
+\end{frame}
+
 \begin{frame}{Introduction}
     \begin{itemize}
     \item Econophysics is a research field applying methods and ideas of statistical physics to economics
@@ -138,7 +151,7 @@ T_{\lambda, \epsilon}(x,y)
 
 The paper refers to the case $\lambda=0$ as the \emph{energy} distribution model, and the case $\lambda \in (0, 1)$ as the \emph{wealth} distribution model.
 
-At a certain point we let $\epsilon \sim \nu(s, \cdot)$ be distributed along some probability measure.
+We let $\epsilon \sim \nu(s, \cdot)$ be distributed along some probability measure.
 
 \end{frame}
 
@@ -167,7 +180,8 @@ Recall that a measure $\mu$ is a \emph{stationary} measure for the Markov proces
 
 \pause
 
-As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0, \infty)^2 \to \rr_{\ge 0}$. One can wonder whether the stationary measure behaves independently on $x$ and $y$, i.e. if we have $\mu(\diff x, \diff y) = \mu(x, y) \diff x \diff y = \mu(x) \mu(y) \diff x \diff y$ (abuse of notation -- function overloading as both measure and density)
+% As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0, \infty)^2 \to \rr_{\ge 0}$.
+One can wonder whether the stationary measure behaves independently on $x$ and $y$, i.e. if we have $\mu(\diff x, \diff y) = \mu(x, y) \diff x \diff y = \mu(x) \mu(y) \diff x \diff y$ (abuse of notation -- function overloading as both measure and density)
 \end{frame}
 
 
@@ -203,7 +217,7 @@ As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0,
         \[
             \epsilon_{\infty}^{\lambda} = (1-\lambda)\sum_{k \ge 0} \lambda^k \epsilon_k
         \]
-    \item All invariant measures are of the form $(\epsilon_{\infty}^{\lambda}, 1 - \epsilon_{\infty}^{\lambda}) \cdot S$
+    \item All invariant measures have the same distribution as the random variable $(\epsilon_{\infty}^{\lambda}, 1 - \epsilon_{\infty}^{\lambda}) \cdot S$ where $S$ is a nonnegative random variable
     \item There are no product invariant measures in this case.
 \end{itemize}
 \end{frame}
@@ -214,7 +228,9 @@ As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0,
 
 
 \begin{frame}{Duality -- a framework for our case}
-Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$.
+The following is described in \authorcite{barbour2000transition}. Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$.
+
+\pause
 
 Let $f_{\eta} \colon \Omega \to \Omega$, for $\eta$ from a discrete state space $\Omega'$. Assume
 \[
@@ -331,9 +347,9 @@ The generator then is given by
 
 \pause
 
-Result:
+Result -- for $\mathbb{E}$ the expectation of the wealth process and $\mathcal{E}$ the expectation of the random walk process, we have
 \[
-\mathbb{E}_x\brackets{x_i(t)} = \mathcal{E}_i\brackets{x_{\mathcal{X}_{(1-\lambda)t}}}
+\mathbb{E}_x\brackets{x_i(t)} = \mathcal{E}_i\brackets{x_{\mathcal{X}_{(1-\lambda)t}}}.
 \]
 \end{frame}
 
@@ -345,6 +361,7 @@ Result:
     \item When $\nu(s, \diff \epsilon) = \diff\epsilon$ is uniform, the case $\lambda=0$ corresponds to the Kipnis-Marchioro-Presutti model
     \item When $\nu(s, \diff \epsilon) = \nu(\diff\epsilon)$ is Beta distributed, the case $\lambda=0$ corresponds to the thermalized Brownian energy process.
 \end{itemize}
+% not a physicist
 \end{frame}
 
 

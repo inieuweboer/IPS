@@ -102,7 +102,7 @@ Define the Gamma function for $\operatorname*{Re}(z) > 0$:
 \Gamma(z)
 = \int_{0}^{\infty} t^{z-1} \exp(-t) \diff t
 \]
-This is mostly known as the real and complex analytical continuation of the factiorial function -- we have for a positive integer $n$ that $\Gamma(n) = (n-1)!$. Using this the function can even be defined for all $z \not \in \zz_{\le 0}$, although this will not be used.
+This is mostly known as the real and complex analytical continuation of the factorial function -- we have for a positive integer $n$ that $\Gamma(n) = (n-1)!$. Using this the function can even be defined for all $z \not \in \zz_{\le 0}$, although this will not be used.
 
 We have the identity
 \[
@@ -219,6 +219,19 @@ Setting $r=0$ and collecting constants gives
 \\\implies & \mu(s) \propto s^C_2 \exp(C_1 s) = s^{\alpha - 1} \exp(-\lambda s)
 \]
 
+Beta:
+
+As the assumption is that $\nu$ is independent of $s$, we have
+\[
+\nu(r)
+\propto \mu(r s) \mu((1-r)s)
+\propto (rs)^{\alpha - 1}\exp(-\lambda rs) ((1-r)s)^{\alpha - 1} \exp(-\lambda (1-r)s)
+\propto r^{\alpha - 1} (1-r)^{\alpha - 1} \exp(-\lambda (r + 1 - r)s)
+= r^{\alpha - 1} (1-r)^{\alpha - 1} \exp(-\lambda s)
+\propto r^{\alpha - 1} (1-r)^{\alpha - 1}
+\]
+which means $\nu$ is Beta distributed with both parameters equal to $\alpha$.
+
 
 \section{Stationary for wealth dist}
 
@@ -234,9 +247,9 @@ R_{n+1} = \lambda r_n + (1-\lambda)\epsilon_n
 \\= \lambda^{n+1} + (1-\lambda)\sum_{k=0}^n \lambda^{k} \epsilon_{n-k}
 \\\overset{\diff}{=} \lambda^{n+1} + (1-\lambda)\sum_{k=0}^n \lambda^{k} \epsilon_{k}
 \to 
- (1-\lambda)\sum_{k=0}^{\infty} \lambda^{k} \epsilon_{k}
+ (1-\lambda)\sum_{k=0}^{\infty} \lambda^{k} \epsilon_{k} \eqdef \epsilon_{\infty}^{\lambda}
 \]
-which gives us the unique stationary distribution$\nu_{\infty}$ for $L$.
+which gives us the unique stationary distribution $\nu_{\infty}$ for $L$.
 
 
 
@@ -270,11 +283,22 @@ LD(\eta, \cdot)(x)
 \]
 which implies
 $\exp(tL) D(\eta, \cdot)(x) = \exp(tQ) D(\cdot, x)(\eta)$
-(the proof of this detail is technical, see \cite{voss2011equivalence} for a proof), which in turn implies (by definition) % https://www.researchgate.net/profile/Anja_Voss-Boehme/publication/261811929_On_the_Equivalence_Between_Liggett_Duality_of_Markov_Processes_and_the_Duality_Relation_Between_Their_Generators/links/00b7d5358d931ad3c6000000/On-the-Equivalence-Between-Liggett-Duality-of-Markov-Processes-and-the-Duality-Relation-Between-Their-Generators.pdf
+% (the proof of this detail is technical, see \cite{voss2011equivalence} for a proof)
+, which in turn implies (by definition) % https://www.researchgate.net/profile/Anja_Voss-Boehme/publication/261811929_On_the_Equivalence_Between_Liggett_Duality_of_Markov_Processes_and_the_Duality_Relation_Between_Their_Generators/links/00b7d5358d931ad3c6000000/On-the-Equivalence-Between-Liggett-Duality-of-Markov-Processes-and-the-Duality-Relation-Between-Their-Generators.pdf
 \[
 \ye{X}{D(\eta, X_t}
 = \ye{\eta}{D(\eta_t, x}.
 \]
+
+In the case of $a(x, y) = \alpha(x - y)$ we have
+\[
+\psi(r)
+&\propto \frac{1}{r(1-r)} \exp\paren*{ \int \frac{-\alpha(r - (1-r)) s}{r(1-r)s} }
+\\&= \frac{1}{r(1-r)} \exp\paren*{ \alpha \int \frac{1 - 2r)}{r(1-r)} }
+\\&= \frac{1}{r(1-r)} \exp\paren*{ \alpha (\ln(1-r) + \ln(r)) }
+\\&= r^{\alpha - 1} (1-r)^{\alpha - 1}
+\]
+
 
 
 One can wonder whether there is a correspondence between duality of Markov processes and duality in the sense of dual spaces and adjoints of operators -- there happens to be one, explored in \cite{jansen2014notion}. %\cite{2012arXiv1210.7193J}. % https://arxiv.org/pdf/1210.7193.pdf
@@ -345,11 +369,24 @@ i.e.
 
 
 \section[nagents]{The wealth distribution model for $N$ agents}
+Consider set of agents $\brackets{N} \defeq \set{1, 2, \hdots, N}$ and a symmetric random walk $\paren{\mathcal{X}_t}_t$ jumping at rate one according to transition probabilities $p(i,j)$, and (vector) process $x(t)$ of wealth of agents
 
-... the fact that this is the generator of a finite state-space Markov process was established in equation (17) section 2.2 of \cite{frankredig2014}.
+Let $T_{\lambda, \epsilon}^{i, j}(x)$ for $x \in [0, \infty)^{\brackets{N}}$ such that
+\[
+T_{\lambda, \epsilon}^{i, j}(x)_k = T_{\lambda, \epsilon}(x_i, x_j)_k
+% equal to \lambda x + (1- \lambda) \cdot (\epsilon OR 1-\epsilon) (x+y)
+T_{\lambda, \epsilon}^{i, j}(x)_k = T_{\lambda, \epsilon}(x_i, x_j)_k
+\]
+
+The generator then is given by
+\[
+\mathcal{L}f(x) = \sum_{i, j} 2 p(i, j) \int \paren*{f(T_{\lambda, \epsilon}^{i, j}(x)) - f(x)} \nu(x+y, \diff \epsilon)
+\]
 
 % Now as $\exp(tL) = S_t f(x) = \ye{x}{f(X_t)}$ and $\frac{\partial}{\partial_t} S_t = A S_t$ we have with $\psi() \defeq S_t f_i(x)$ that ...
-Define $\bar{f}_x(i) = f_i(x)$, a function $\itern \to \rr$. This is a function the generator $A$ of the continuous random walk $(\mathcal{X}_t)_t$ works on. We have
+Define $\bar{f}_x(i) = f_i(x)$, a function $\itern \to \rr$. This is a function the generator $A$ of the continuous random walk $(\mathcal{X}_t)_t$ works on. Note that the fact that this is the generator of a finite state-space Markov process was established in equation (17) section 2.2 of \cite{frankredig2014}.
+
+We have
 \[
 Lf_i(x) = (1 - \lambda) A \bar{f}_x(i)
 \\\implies
@@ -361,7 +398,7 @@ S_t f_i(x) = P_{(1 - \lambda)t} \bar{f}_x(i)
 \\\implies
 \ye{x}{x_i(t)} = \mathcal{E}_i\brackets{x_{\mathcal{X}_{(1-\lambda)t}}}
 \]
-Note we again used the technical result from \cite{voss2011equivalence}.
+% Note we again used the technical result from \cite{voss2011equivalence}.
 
 
 \section*{Further reading}
