@@ -47,7 +47,7 @@
 % Authors and title
 \newcommand*{\xauthor}{Ismani Nieuweboer}
 \newcommand*{\xauthortiny}{I. Nieuweboer}
-\newcommand*{\xtitle}{Wealth distribution models\xspace}
+\newcommand*{\xtitle}{A wealth distribution model\xspace}
 \newcommand*{\xsubtitle}{Duality and stationary distributions\xspace}
 % \newcommand*{\xsubtitle}{\xspace}
 
@@ -101,7 +101,7 @@
 \begin{itemize}
     \item Model is mathematical
     \item Need to take care with interpretations and drawing conclusions about the real world -- empirical research is needed for this
-    \item Need to take care especially due to the evident link between politics and economics
+    % \item Need to take care especially due to the evident link between politics and economics
     % \item Also need to take care about language one uses -- one may still end up unconsciously make light political statements (?)
     % \item Hereby a warning to the listener to make sure the speaker does not cross these boundaries
 \end{itemize}
@@ -133,7 +133,7 @@ We have $x' + y' = x + y \eqdef s$, a conserved quantity, which occur in physics
 
 Letting $T_{\epsilon}(x,y) = (x', y')$, we have a wealth-conserving map.
 \pause
-One can also consider that agents save a part of their wealth. For this let $\lambda \in [0, 1]$ be the \emph{saving propensity}. This naturally leads to
+One can also consider that agents save a part of their wealth. For this let $\lambda \in (0, 1)$ be the \emph{saving propensity}. This naturally leads to
 \[
 T_{\lambda, \epsilon}(x,y)
 = \lambda (x, y) + (1-\lambda) T_{\epsilon}(x,y)\]
@@ -179,7 +179,7 @@ Lf(x, y) = \int_0^1 \paren{f(T_{\lambda, \epsilon}(x, y)) - f(x, y) } \nu(x+y, \
 Recall that a measure $\mu$ is a \emph{stationary} measure for the Markov process if and only if $\mu(Lf) = \int Lf \diff \mu = 0$.
 
 % As the state space is $[0, \infty)^2$, we have that as a measure, $\mu\colon [0, \infty)^2 \to \rr_{\ge 0}$.
-One can wonder whether the stationary measure behaves independently on $x$ and $y$, i.e. if we have $\mu(\diff x, \diff y) = \mu(x, y) \diff x \diff y = \mu(x) \mu(y) \diff x \diff y$ (abuse of notation -- function overloading as both measure and density)
+One can wonder whether the stationary measure behaves independently on $x$ and $y$, i.e. if we have $\mu(\diff x, \diff y) = \mu(x, y) \diff x \diff y = \mu(x) \mu(y) \diff x \diff y$. %(abuse of notation -- function overloading as both measure and density)
 \end{frame}
 
 
@@ -189,6 +189,7 @@ One can wonder whether the stationary measure behaves independently on $x$ and $
 \item What are the stationary distribution in this model?
 \item Can we write the stationary distributions as a product?
 \item Do there exist discrete dual processes (and if yes under which duality functions)?
+\item Is there a diffusion process for the model?
 \item Can anything be said for $N$ agents?
 \end{itemize}
 % not a physicist but model corresponds to physical model -- references given in paper
@@ -197,19 +198,22 @@ One can wonder whether the stationary measure behaves independently on $x$ and $
 
 
 \begin{frame}{Finding product distributions in case $\lambda = 0$}
+\begin{theorem}
 \begin{itemize}
     \item For $\lambda = 0$, the measure $\mu$ is invariant if and only if $\nu(s, a) \propto \mu(as, (1-a)s)$.
     \item If $\mu$ is a product measure and $\nu$ does not depend on $s$, we have $\mu(x) \propto x^{b-1} \exp(-\lambda x)$ (Gamma distribution) and $\nu(s, \epsilon) = \nu(\epsilon) \propto \epsilon^{b-1}(1-\epsilon)^{b-1}$ (Beta distribution).
 \end{itemize}
+\end{theorem}
 \end{frame}
 
 
-\begin{frame}{Proofs}
-% board
-\end{frame}
+% \begin{frame}{Proofs}
+% % board
+% \end{frame}
 
 
 \begin{frame}{Invariant measures in case $\lambda > 0$}
+\begin{theorem}
 \begin{itemize}
     \item For $\lambda > 0$, the stationary measure can be characterized by the random variable
         \[
@@ -218,11 +222,12 @@ One can wonder whether the stationary measure behaves independently on $x$ and $
     \item All invariant measures have the same distribution as the random variable $(\epsilon_{\infty}^{\lambda}, 1 - \epsilon_{\infty}^{\lambda}) \cdot S$ where $S$ is a nonnegative random variable
     \item There are no product invariant measures in this case.
 \end{itemize}
+\end{theorem}
 \end{frame}
 
 
-\begin{frame}{Proofs}
-\end{frame}
+% \begin{frame}{Proofs}
+% \end{frame}
 
 
 \begin{frame}{Duality -- a framework for our case}
@@ -274,12 +279,14 @@ Lf(r)
 = \int_0^1 \paren{f(\lambda r + (1-\lambda) \epsilon) - f(r)} \nu(\diff \epsilon)
 \]
 we get
+\pause
 \[
 Lf_n(r)
 &= \int_0^1 (\lambda r + (1-\lambda) \epsilon)^n \nu(\diff \epsilon) - f_n(r)
 \\&= \sum_{k=0}^n \lambda^k (1-\lambda)^{n-k} \int_0^1 \epsilon^{n-k} \nu(\diff \epsilon) f_k(r) - f_n(r)
 = \sum_{k=0}^n r(n, k) f_k(r)
 \]
+\pause
 and as $\nu_{\infty}^{\lambda}$ is the stationary measure, we get $q(k, n) = r(k, n) \frac{\nu_{\infty}^{\lambda}(f_k)}{\nu_{\infty}^{\lambda}(f_n)}$ as rates for the discrete dual process with duality function $D(n, r) = \frac{f_n(r)}{\nu_{\infty}^{\lambda}(f_n)}$.
 \end{frame}
 
@@ -300,7 +307,7 @@ Transforming with $s = x+y$ and $r = \frac{x}{s}$ gives
 \[
 Af(r)
 = \frac{a(rs, (1-r)s)}{s}\partial_r + r(1-r) \partial_r^2
-= \mu(r)\partial_r + h(r) \partial_r^2
+= g(r)\partial_r + h(r) \partial_r^2
 \]
 \end{frame}
 
@@ -310,19 +317,37 @@ Af(r)
 \[
 Af(r)
 = \frac{a(rs, (1-r)s)}{s}\partial_r + r(1-r) \partial_r^2
-= \mu(r)\partial_r + h(r) \partial_r^2
+= g(r)\partial_r + h(r) \partial_r^2
 \]
-The corresponding Fokker-Planck equation is
+The corresponding Fokker-Planck equation for $\nu$ the density of a stationary measure is
 \pause
 \[
-\partial_t \psi(r) = 0 =
-- \partial_r\brackets{\mu(r) \psi(r)} + \partial_r^2\brackets{h(r) \psi(r)}.
+\partial_t \nu(r) = 0 =
+- \partial_r\brackets{g(r) \nu(r)} + \partial_r^2\brackets{h(r) \nu(r)}.
 \]
 from which we can derive the stationary measure
 \pause
 \[
-\psi(r) \propto \frac{1}{r(1-r)}\exp\paren*{\int\frac{a(rs, (1-r)s)}{s} \diff r} % board
+\nu(r) \propto \frac{1}{r(1-r)}\exp\paren*{\int\frac{a(rs, (1-r)s)}{r(1-r)s} \diff r}. % board
 \]
+Consider example
+\pause
+\[
+a(x, y) = -\alpha(x - y).
+\]
+\end{frame}
+
+
+
+\begin{frame}{Diffusion process}
+For this example, the relation with original generator, due to uniqueness of stationary measure, is
+\[
+\mathcal{L}f(x, y)
+&= Pf(x, y) - f(x, y)
+\\&= \lim_{t\to\infty} P_t f(x, y) - f(x, y)
+\\&= \lim_{t\to\infty} \exp(tL) f(x, y) - f(x, y)
+\]
+
 Note: \authorcite{yakovenko2009colloquium} also mentions the Fokker--Planck equation in setting for income distributions.
 %example linear case
 \end{frame}
@@ -339,16 +364,17 @@ Consider set of agents $\brackets{N} \defeq \set{1, 2, \hdots, N}$ and a symmetr
 
 \pause
 
-Let $T_{\lambda, \epsilon}^{i, j}(x)$ for $x \in [0, \infty)^{\brackets{N}}$ such that
+Let $T_{\lambda, \epsilon}^{i, j}(x)$ for $x \in [0, \infty)^{\brackets{N}}$ such that if $k = i$ or $j$ then
 \[
 T_{\lambda, \epsilon}^{i, j}(x)_k = T_{\lambda, \epsilon}(x_i, x_j)_k
 % equal to \lambda x + (1- \lambda) \cdot (\epsilon OR 1-\epsilon) (x+y)
-T_{\lambda, \epsilon}^{i, j}(x)_k = T_{\lambda, \epsilon}(x_i, x_j)_k
+% T_{\lambda, \epsilon}^{i, j}(x)_k = T_{\lambda, \epsilon}(x_i, x_j)_k
 \]
+and otherwise just $T_{\lambda, \epsilon}^{i, j}(x)_k = x_k$.
 
 \pause
 
-The generator then is given by
+The generator is given by
 \[
 \mathcal{L}f(x) = \sum_{i, j} 2 p(i, j) \int \paren*{f(T_{\lambda, \epsilon}^{i, j}(x)) - f(x)} \nu(\sum_i x_i, \diff \epsilon)
 \]
