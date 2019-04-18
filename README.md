@@ -1,5 +1,5 @@
 # Interacting Particle Systems
 
-Project:
+Mini-project done on econophysics for the Mastermath course Interacting Particle Systems in Delft organized by Frank Redig.
 
-https://www.overleaf.com/read/nyyhkkscrmfh
+Latex and pdf can be viewed in: https://www.overleaf.com/read/nyyhkkscrmfh
