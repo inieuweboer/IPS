@@ -215,7 +215,7 @@ One can wonder whether the stationary measure behaves independently on $x$ and $
 \begin{frame}{Invariant measures in case $\lambda > 0$}
 \begin{theorem}
 \begin{itemize}
-    \item For $\lambda > 0$, the stationary measure can be characterized by the random variable
+    \item For $\lambda > 0$ and $\nu$ independent of $s$, the stationary measure can be characterized by the random variable
         \[
             \epsilon_{\infty}^{\lambda} = (1-\lambda)\sum_{k \ge 0} \lambda^k \epsilon_k
         \]
@@ -230,7 +230,7 @@ One can wonder whether the stationary measure behaves independently on $x$ and $
 % \end{frame}
 
 
-\begin{frame}{Duality -- a framework for our case}
+\begin{frame}{Duality -- a framework for energy and wealth distributions}
 The following is described in \authorcite{barbour2000transition}. Let $(X_t)_t$ be a Markov process with Markov generator $L$ on some continuous state space $\Omega$, with some invariant measure $\mu$.
 
 Let $f_{\eta} \colon \Omega \to \Omega$ be nonnegative, for $\eta$ from a discrete state space $\Omega'$. Assume
@@ -376,12 +376,13 @@ and otherwise just $T_{\lambda, \epsilon}^{i, j}(x)_k = x_k$.
 
 The generator is given by
 \[
-\mathcal{L}f(x) = \sum_{i, j} 2 p(i, j) \int \paren*{f(T_{\lambda, \epsilon}^{i, j}(x)) - f(x)} \nu(\sum_i x_i, \diff \epsilon)
+% \mathcal{L}f(x) = \sum_{i, j} 2 p(i, j) \int \paren*{f(T_{\lambda, \epsilon}^{i, j}(x)) - f(x)} \nu(\sum_i x_i, \diff \epsilon)
+\mathcal{L}f(x) = \sum_{i, j} 2 p(i, j) \int \paren*{f(T_{\lambda, \epsilon}^{i, j}(x)) - f(x)} \nu(s, \diff \epsilon)
 \]
 
 \pause
 
-Result -- for $\mathbb{E}$ the expectation of the wealth process and $\mathcal{E}$ the expectation of the random walk process, we have
+Result if $\nu$ independent of $s$ -- for $\mathbb{E}$ the expectation of the wealth process and $\mathcal{E}$ the expectation of the random walk process, we have
 \[
 \mathbb{E}_x\brackets{x_i(t)} = \mathcal{E}_i\brackets{x_{\mathcal{X}_{(1-\lambda)t}}}.
 \]

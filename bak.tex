@@ -1,0 +1,30 @@
+BM:
+
+\[
+Af = \frac{f''}{2}
+\]
+
+hence for ohnstein uhlenbeck, w $\phi(x) = x^2$
+\[
+A(f \circ \phi)(x)
+= \frac{(f \circ \phi)''}{2}
+= \frac{1}{2}\paren{f' \circ \phi \cdot \phi'}'(x)
+= \frac{1}{2}\paren{f'' \circ \phi \cdot \phi' \cdot \phi' + f'\circ\phi\cdot\phi''}(x)
+= \frac{1}{2}\paren{f''(x^2) \cdot 4x^2 + f'(x^2) \cdot 2}
+= 2x^2 f''(x^2) + f'(x^2)
+% = (Bf) \circ \phi)(x)
+= Bf(x^2)
+\]
+hence $Bf(x) = 2x f''(x) + f'(x)$
+
+
+Laplace:
+\[
+\phi(x) = x + \int_0^x \sin(x-t) \phi(t) \diff t
+\phi'(x) = 1 + \sin(x - x) \phi(x) + \int_0^x \cos(x-t) \phi(t) \diff t
+L(\phi) = L(\phi) + L(\sin) L(\phi)
+\]
+follows from leibniz integral rule; hence
+\[
+\phi(x) = x + \frac{x^3}{3!}
+\]
